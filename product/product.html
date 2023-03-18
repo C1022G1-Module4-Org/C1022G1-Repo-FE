@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Product</title>
+    <style>
+        .card {
+            width: 350px;
+        }
+    </style>
+</head>
+<body>
+    <form class="d-flex mt-5" role="search" onsubmit="loadProducts(); return false;">
+        <input class="form-control me-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+    <h1>Product list of Apple</h1>
+
+    <!-- Button trigger modal create -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Create new product
+    </button>
+    <div id="listProduct" class="d-flex"></div>
+
+
+
+
+
+    <!-- Modal create-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Create product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        <form id="createNewProduct">
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="productName" class="form-label">Product name</label>
+                    <input type="text" class="form-control" id="productName" aria-describedby="productName">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="price" aria-describedby="price">
+                </div>
+                <div class="mb-3">
+                    <label for="img" class="form-label">Img</label>
+                    <input type="text" class="form-control" id="img" aria-describedby="img">
+                </div>
+                <div class="mb-3">
+                    <label for="describe" class="form-label">Describe</label>
+                    <input type="text" class="form-control" id="describe" aria-describedby="describe">
+                </div>
+                <div class="mb-3">
+                    <label for="dataSize" class="form-label">Data size</label>
+                    <input type="text" class="form-control" id="dataSize" aria-describedby="dataSize">
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="text" class="form-control" id="quantity" aria-describedby="quantity">
+                </div>
+                <div id="madeInCategory"></div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+        </div>
+        </div>
+    </div>
+    <!-- Modal delete-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="deleteModalLabel">Create product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="deleteProductForm">
+                <div>
+                    Bạn có muốn xóa sản phẩm <span id="deleteProductName"></span> không ?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+    <script src="/jquery-3.6.4.min.js"></script>
+<script src="product.js"></script>
+</body>
+</html>
