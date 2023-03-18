@@ -1,14 +1,14 @@
-function loadBills(page){
+function loadStores(page){
     let search = $("#search").val();
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/bill?page=${page ? page : "0"}&code=${search}`,
+        url: `http://localhost:8080/store?page=${page ? page : "0"}&name=${search}`,
         headers: {
     "Content-Type": "application/json",
         },
         success: function(data){
         
-            renderBills(data);
+            renderStores(data);
             renderPage(data);
         },
         error: function(error){
@@ -18,59 +18,60 @@ function loadBills(page){
 }
 
 $(document).ready(function(){
-    loadBills();
+    loadStores();
 })
 
-function renderBills(billList){
+function renderStores(storeList){
     let elements = "";
-    for(let bill of billList.content){
+    for(let store of storeList.content){
         elements +=`
             <tr>
-                <td>${bill.id}</td>
-                <td>${bill.code}</td>
-                <td>${bill.name}</td>
-                <td>${bill.billTypeDTO.type}</td>
+                <td>${store.id}</td>
+                <td>${store.name}</td>
+                <td>${store.address}</td>
+                <td>${store.city}</td>
+                <td>${store.storeTypeDTO.type}</td>
                 <td><a class="btn btn-primary">Edit</a></td>
                 <td>
-                <button type="button" class="btn btn-primary" onclick= "getBillIdAndName(${bill.id}, '${bill.name}')" data-toggle="modal" data-target="#modelId">Delete</button>
+                <button type="button" class="btn btn-primary" onclick= "getStoreIdAndName(${store.id}, '${store.name}')" data-toggle="modal" data-target="#modelId">Delete</button>
                 </td>
             </tr>
         `
     }
-    $("#listBills").html(elements);
+    $("#listStores").html(elements);
 }
 
 function movePage(page){
-    loadBills(page);
+    loadStores(page);
 }
 
-function renderPage(billList){
+function renderPage(storeList){
     let pageable = "";
     if(
-        billList.number == billList.totalPages - 1 &&
-        billList.number > 0
+        storeList.number == storeList.totalPages - 1 &&
+        storeList.number > 0
         ){
             pageable +=`
-            <button class="btn btn-secondary" onclick="movePage(${billList.number - 1})">
+            <button class="btn btn-secondary" onclick="movePage(${storeList.number - 1})">
             Previous
             </button>
             `;
         }
-    for(let i = 1; i <= billList.totalPages; i++){
+    for(let i = 1; i <= storeList.totalPages; i++){
         let page = $(`
         <button class="btn btn-secondary" onclick="movePage(${i - 1})">
             ${i}
         </button>`);
-        if(i === billList.number + 1){
+        if(i === storeList.number + 1){
             page.add("active");
         }else{
             page.remove("active");
         }
         pageable += page.prop("outerHTML");
     }
-    if(billList.number == 0 && billList.number < billList.totalPages){
+    if(storeList.number == 0 && storeList.number < storeList.totalPages){
         pageable +=`
-        <button class="btn btn-secondary" onclick="movePage(${billList.number + 1})">
+        <button class="btn btn-secondary" onclick="movePage(${storeList.number + 1})">
         Next
         </button>
         `;
@@ -78,23 +79,23 @@ function renderPage(billList){
     $("#pagination").html(pageable);
 }
 // delete
-function getBillIdAndName(id, name){
+function getStoreIdAndName(id, name){
     debugger
     document.getElementById("deleteId").value = id;
     document.getElementById("deleteName").innerText = "Do you wanna delete " + name + "?";
 }
 
-function deleteBill(id){
+function deleteStore(id){
     debugger
     $.ajax({
         type: "DELETE",
-        url: `http://localhost:8080/bill/delete/${id}`,
+        url: `http://localhost:8080/store/delete/${id}`,
         success: function(data){
             console.log("success")
             $('#modelId').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
-            loadBills();
+            loadStores();
         },
         error: function(error){
             console.log(error);
@@ -102,11 +103,11 @@ function deleteBill(id){
     })
 }
 
-$('#deleteBill').submit(
+$('#deleteStore').submit(
     function(event){
         debugger
         event.preventDefault();
         let id = $('#deleteId').val();
-        deleteBill(id);
+        deleteStore(id);
     }
 );
