@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<h2>Danh sách khách hàng</h2>
+<!--<form action="" role="search" onsubmit="loadBlogs();return false;">-->
+<!--    <input type="text" id="idSearch" name="author" placeholder="Tìm kiếm...">-->
+<!--    <button type="submit" >Tìm kiếm</button>-->
+<!--</form>-->
+<!--<div id="searchProduct"></div>-->
+<div>
+    <button type="button"
+            class="btn btn-primary"
+            data-toggle="modal" data-target="#exampleModalCreate"
+    >
+        Create
+    </button>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>Address</th>
+            <th>ID Card</th>
+            <th>Phone Number</th>
+            <th>customer type</th>
+            <th>birth</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody id="listCustomer"></tbody>
+    </table>
+</div>
+
+<!--modal thêm mới khách hàng -->
+<div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalTitle2" style="color: red">Sửa thông tin khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editCustomerForm">
+                <div>
+                    <label>Tên khách hàng</label>
+                    <input type="text" id="name1" placeholder="Nhập tên" required>
+                    <br>
+                    <label>Địa chỉ</label>
+                    <input type="text" id="address1" placeholder="Nhập địa chỉ" required>
+                    <br>
+                    <label>CMND</label>
+                    <input type="text" id="idCard1" placeholder="Nhập CCCD" required>
+                    <br>
+                    <label>SDT</label>
+                    <input type="text" id="phoneNumber1" placeholder="Nhập SDT" required>
+                    <br>
+                    <label>Ngày sinh</label>
+                    <input type="text" id="birth1" placeholder="Nhập ngày sinh" required>
+                    <br>
+                    <label>Img</label>
+                    <input type="text" id="img1">
+                    <br>
+                    <label>Kiểu khách hàng</label>
+                    <div id="customerTypeForm1"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<div id="loadMoreContainer" class="d-flex justify-content-center"></div>-->
+<!-- modal thêm mới khách hàng -->
+<div class="modal fade" id="exampleModalCreate" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalTitle" style="color: red">Thêm mới khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="createCustomerForm">
+                <div>
+                    <label>Tên khách hàng</label>
+                    <input type="text" id="name" placeholder="Nhập tên" required>
+                    <br>
+                    <label>Địa chỉ</label>
+                    <input type="text" id="address" placeholder="Nhập địa chỉ" required>
+                    <br>
+                    <label>CMND</label>
+                    <input type="text" id="idCard" placeholder="Nhập CCCD" required>
+                    <br>
+                    <label>SDT</label>
+                    <input type="text" id="phoneNumber" placeholder="Nhập SDT" required>
+                    <br>
+                    <label>Ngày sinh</label>
+                    <input type="text" id="birth" placeholder="Nhập ngày sinh" required>
+                    <br>
+                    <label>Img</label>
+                    <input type="text" id="img">
+                    <br>
+                    <label>Kiểu khách hàng</label>
+                    <div id="customerTypeForm"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- //modal xóa khách hàng-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: red">Xóa sản phẩm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" id="delete-customer">
+                    <div class="modal-body">
+                        <input hidden type="text" id="id" name="id">
+                        <p id="nameCustomer"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="customer.js"></script>
+</body>
+
+</html>
