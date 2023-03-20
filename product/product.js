@@ -2,11 +2,13 @@ $(document).ready(() => {
     loadProducts();
 })
 
+
 const loadProducts = () => {
+    debugger
     let keySearch = $("#search").val();
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/apple/product`,
+        url: `http://localhost:8080/apple/product?search=`+keySearch,
         headers:{
             "Content-Type":"application/JSON",
         },
@@ -33,7 +35,8 @@ const listProduct = (products) => {
                 </div>
             </div>
             <div class="stats mt-2">
-                <div class="d-flex justify-content-between p-price"><span>${product.describeProduct}</span><span>Price: ${product.price}$</span></div>
+                <div class="d-flex justify-content-between p-price"><span>${product.describeProduct}</span>
+                <span>Price: ${product.price}$</span></div>
                 <div class="d-flex justify-content-between p-price">${product.dateSize}</div>
                 <div class="d-flex justify-content-between p-price">${product.quantity}</div>
                 <div class="d-flex justify-content-between p-price">Place made: ${product.madeIn.placeMadeIn}</div>
@@ -84,8 +87,7 @@ const showListMadeIn = (listMadeInCategory) => {
     $("#editMadeInCategory").html(element);
 }
 
-$("#createNewProduct").submit(() => {
-    debugger
+const create = () => {
     let nameProduct = $('#productName').val();
     let price = $('#price').val();
     let img = $('#img').val();
@@ -95,7 +97,7 @@ $("#createNewProduct").submit(() => {
     let madeInProduct = parseInt($('#madeInValue').val());
     addNewProduct(nameProduct,price,img,describeProduct,dataSize,quantity,madeInProduct)
 
-})
+}
 
 const addNewProduct = (nameProduct,price,img,describeProduct,dataSize,quantity,madeInProduct) => {
     debugger
@@ -116,6 +118,13 @@ const addNewProduct = (nameProduct,price,img,describeProduct,dataSize,quantity,m
         }),
         success: (data) => {
             alert("Thêm thành công")
+            document.getElementById("productName").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("img").value = "";
+            document.getElementById("describe").value = "";
+            document.getElementById("dataSize").value = "";
+            document.getElementById("quantity").value = "";
+            loadProducts();
         },
         error : (error) => {
             console.log(error);
@@ -124,7 +133,7 @@ const addNewProduct = (nameProduct,price,img,describeProduct,dataSize,quantity,m
 }
 const deleteProduct = (nameProduct, id) => {
     $("#deleteProductName").html(nameProduct);
-    $("#deleteProductForm").click(() => {
+    $("#deleteProductForm").submit(() => {
         deleteProductButton(id);
     } 
     )
@@ -139,6 +148,7 @@ const deleteProductButton = (id) => {
         },
         success: (data) => {
             console.log("Xóa thành công");
+            loadProducts();
         },
         error: (error) => {
             console.log(error);
@@ -147,12 +157,7 @@ const deleteProductButton = (id) => {
 }
 
 const editProduct = (id,name,img,describe,price,dataSize,quantity) => {
-    $("#editProductName").html(name);
-    $("#inputEditImg").html(img);
-    $("#inputEditPrice").html(price);
-    $("#inputEditDescribe").html(describe);
-    $("#inputEditDataSize").html(dataSize);
-    $("#inputEditQuantity").html(quantity);
+    categoryEdit(name,img,describe,price,dataSize,quantity);
     $("#editProduct").click(() => {
         let nameProduct = $('#editProductName').val();
         let priceProduct = $('#editPrice').val();
@@ -160,12 +165,42 @@ const editProduct = (id,name,img,describe,price,dataSize,quantity) => {
         let describeProduct = $('#editDescribe').val();
         let dataSizeProduct = $('#editDataSize').val();
         let quantityProduct = $('#editQuantity').val();
-        let madeInProduct = $('#editMadeInCategory').val();
-        editProductButton(id,nameProduct,priceProduct,imgProduct,describeProduct,dataSizeProduct,quantityProduct,madeInProduct);
+        let madeInProduct = $('#madeInValue').val();
+        editProductButton(id,nameProduct,imgProduct,priceProduct,describeProduct,dataSizeProduct,quantityProduct,madeInProduct);
     })
 }
 
-const editProductButton = (id,name,img,price,dataSize,quantity,madeIn) => {
+const categoryEdit = (name,img,describe,price,dataSize,quantity) => {
+    let element =`
+    <div class="mb-3">
+                    <label for="editProductName" class="form-label">Product name</label>
+                    <input type="text" class="form-control" id="editProductName" value="${name}" aria-describedby="productName">
+                </div>
+                <div class="mb-3">
+                    <label for="editPrice" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="editPrice" value="${price}" aria-describedby="price"><div id="inputEditPrice"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="editImg" class="form-label">Img</label>
+                    <input type="text" class="form-control" id="editImg" value="${img}" aria-describedby="img"><div id="inputEditImg"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="editDescribe" class="form-label">Describe</label>
+                    <input type="text" class="form-control" id="editDescribe" value="${describe}" aria-describedby="describe"><div id="inputEditDescribe"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="editDataSize" class="form-label">Data size</label>
+                    <input type="text" class="form-control" id="editDataSize" value="${dataSize}" aria-describedby="dataSize"><div id="inputEditDataSize"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="editQuantity" class="form-label">Quantity</label>
+                    <input type="text" class="form-control" id="editQuantity" value="${quantity}" aria-describedby="quantity"><div id="inputEditQuantity"></div>
+                </div>
+    `
+    $("#categoryEditInput").html(element);
+}
+
+const editProductButton = (id,name,img,price,dataSize,quantity,describeProduct,madeIn) => {
     $.ajax({
         type: "PUT",
         url: `http://localhost:8080/apple/product/${id}`,
@@ -179,10 +214,11 @@ const editProductButton = (id,name,img,price,dataSize,quantity,madeIn) => {
             price : price,
             quantity :quantity,
             describeProduct :describeProduct,
-            madeIn : madeIn
+            madeIn : {id: madeIn}
         }),
         success: (data) => {
             console.log("Cập nhật thành công");
+            loadProducts();
         },
         error: (error) => {
             console.log("Cập nhật thất bại");
