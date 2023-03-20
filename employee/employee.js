@@ -82,7 +82,7 @@ const showListPosition = (listPositionCategory) => {
 
 const addNew = () => {
     let nameEmployee = $('#employeeName').val();
-    let idCard = $('#idcard').val();
+    let idCard = $('#idCard').val();
     let dateofbirth = $('#dateofbirth').val();
     let img = $('#img').val();
     let phoneNumber = $('#phoneNumber').val();

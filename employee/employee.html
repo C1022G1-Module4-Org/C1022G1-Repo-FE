@@ -46,8 +46,8 @@
                     <input type="text" class="form-control" id="dateofbirth" aria-describedby="dateofbirth">
                 </div>
                 <div class="mb-3">
-                    <label for="idcard" class="form-label">ID Card</label>
-                    <input type="text" class="form-control" id="idcard" aria-describedby="idcard">
+                    <label for="idCard" class="form-label">ID Card</label>
+                    <input type="text" class="form-control" id="idCard" aria-describedby="idCard">
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label">Phone Number</label>
@@ -81,7 +81,7 @@
             </div>
             <form id="deleteEmployeeForm">
                 <div>
-                    Bạn có muốn xóa nhân viên <span id="deleteEmployeeName"></span> không ?
+                     Do you want delete <span class="text-danger" id="deleteEmployeeName"></span> now ?
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -96,7 +96,7 @@
 <script src="employee.js"></script>
 
  <!-- Modal Edit-->
- <div class="modal fade" id="exampleModa2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
