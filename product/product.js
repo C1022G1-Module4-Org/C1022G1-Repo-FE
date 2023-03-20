@@ -37,10 +37,17 @@ const listProduct = (products) => {
                 <div class="d-flex justify-content-between p-price">${product.dateSize}</div>
                 <div class="d-flex justify-content-between p-price">${product.quantity}</div>
                 <div class="d-flex justify-content-between p-price">Place made: ${product.madeIn.placeMadeIn}</div>
-                <div onclick="deleteProduct('${product.name}','${product.id}')" class="d-flex justify-content-between align-item-center p-price">
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        Delete
-                    </button>
+                <div class="d-flex">
+                    <div onclick="editProduct('${product.id}','${product.name}','${product.img}','${product.describeProduct}','${product.price}','${product.dateSize}','${product.quantity}')" class="d-flex justify-content-between align-item-center p-price">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+                            Edit
+                        </button>
+                    </div>
+                    <div onclick="deleteProduct('${product.name}','${product.id}')" class="d-flex justify-content-between align-item-center p-price">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                            Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,25 +77,28 @@ const showListMadeIn = (listMadeInCategory) => {
     let element = `<label for="quantity" class="form-label">Made in</label>
     <select class='form-control' id='madeInValue'>`;
     for (let madeIn of listMadeInCategory){
-        element += `<option value=${madeIn.placeMadeIn}>${madeIn.placeMadeIn}</option>`
+        element += `<option value=${madeIn.id}>${madeIn.placeMadeIn}</option>`
     }
     element += `</select>`
     $("#madeInCategory").html(element);
+    $("#editMadeInCategory").html(element);
 }
 
-$("#createNewProduct").click(() => {
+$("#createNewProduct").submit(() => {
+    debugger
     let nameProduct = $('#productName').val();
     let price = $('#price').val();
     let img = $('#img').val();
     let describeProduct = $('#describe').val();
     let dataSize = $('#dataSize').val();
     let quantity = $('#quantity').val();
-    let madeInProduct = $('#madeInValue').val();
+    let madeInProduct = parseInt($('#madeInValue').val());
     addNewProduct(nameProduct,price,img,describeProduct,dataSize,quantity,madeInProduct)
 
 })
 
 const addNewProduct = (nameProduct,price,img,describeProduct,dataSize,quantity,madeInProduct) => {
+    debugger
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/apple/product`,
@@ -102,7 +112,7 @@ const addNewProduct = (nameProduct,price,img,describeProduct,dataSize,quantity,m
             price : price,
             quantity :quantity,
             describeProduct :describeProduct,
-            madeIn : madeInProduct
+            madeIn : {id: madeInProduct}
         }),
         success: (data) => {
             alert("Thêm thành công")
@@ -132,6 +142,50 @@ const deleteProductButton = (id) => {
         },
         error: (error) => {
             console.log(error);
+        }
+    })
+}
+
+const editProduct = (id,name,img,describe,price,dataSize,quantity) => {
+    $("#editProductName").html(name);
+    $("#inputEditImg").html(img);
+    $("#inputEditPrice").html(price);
+    $("#inputEditDescribe").html(describe);
+    $("#inputEditDataSize").html(dataSize);
+    $("#inputEditQuantity").html(quantity);
+    $("#editProduct").click(() => {
+        let nameProduct = $('#editProductName').val();
+        let priceProduct = $('#editPrice').val();
+        let imgProduct = $('#editImg').val();
+        let describeProduct = $('#editDescribe').val();
+        let dataSizeProduct = $('#editDataSize').val();
+        let quantityProduct = $('#editQuantity').val();
+        let madeInProduct = $('#editMadeInCategory').val();
+        editProductButton(id,nameProduct,priceProduct,imgProduct,describeProduct,dataSizeProduct,quantityProduct,madeInProduct);
+    })
+}
+
+const editProductButton = (id,name,img,price,dataSize,quantity,madeIn) => {
+    $.ajax({
+        type: "PUT",
+        url: `http://localhost:8080/apple/product/${id}`,
+        headers:{
+            "Content-Type":"application/JSON"
+        },
+        data:JSON.stringify({
+            name : name,
+            dateSize : dataSize,
+            img : img,
+            price : price,
+            quantity :quantity,
+            describeProduct :describeProduct,
+            madeIn : madeIn
+        }),
+        success: (data) => {
+            console.log("Cập nhật thành công");
+        },
+        error: (error) => {
+            console.log("Cập nhật thất bại");
         }
     })
 }

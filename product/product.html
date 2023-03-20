@@ -28,9 +28,6 @@
     <div id="listProduct" class="d-flex"></div>
 
 
-
-
-
     <!-- Modal create-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -75,6 +72,7 @@
         </div>
         </div>
     </div>
+
     <!-- Modal delete-->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -92,6 +90,52 @@
                 <button type="submit" class="btn btn-primary">Delete</button>
                 </div>
             </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Edit create-->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editModalLabel">Edit product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        <form id="editProduct">
+            <div class="modal-body">
+                <div id="idexEditProduct"></div>
+                <div class="mb-3">
+                    <label for="inputEditName" class="form-label">Product name</label>
+                    <input type="text" class="form-control" id="inputEditName" aria-describedby="productName"><div id="inputEditName"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="editPrice" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="editPrice" aria-describedby="price"><div id="inputEditPrice"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="editImg" class="form-label">Img</label>
+                    <input type="text" class="form-control" id="editImg" aria-describedby="img"><div id="inputEditImg"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="editDescribe" class="form-label">Describe</label>
+                    <input type="text" class="form-control" id="editDescribe" aria-describedby="describe"><div id="inputEditDescribe"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="editDataSize" class="form-label">Data size</label>
+                    <input type="text" class="form-control" id="editDataSize" aria-describedby="dataSize"><div id="inputEditDataSize"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="editQuantity" class="form-label">Quantity</label>
+                    <input type="text" class="form-control" id="editQuantity" aria-describedby="quantity"><div id="inputEditQuantity"></div>
+                </div>
+                <div id="editMadeInCategory"></div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
         </div>
         </div>
     </div>
