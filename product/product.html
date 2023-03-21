@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+
+    <link rel="stylesheet" href="/layout/assets/css/style.css">
+    <title>Product</title>
+</head>
+<body>
+    <!-- Top menu -->
+    <nav class="navbar navbar-expand-lg navbar-inverse navbar-fixed-top px-1 py-0 fixed-top bg-blueGray-200">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="/layout/assets/img/logo@2x.png" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link active text-center" aria-current="page" href="#">Apple</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="#">Product</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="#">Employee</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="#">Customer</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="#">Store</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="#">Contact</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <div class="nav-item mx-2">
+                    <a class="nav-link fw-bold" href="#" style="color: grey;">Sign in</a>
+                </div>
+                <div class="nav-item bg-primary rounded-pill mx-2">
+                    <a class="nav-link text-white" href="#">Sign up</a>
+                </div>
+            </form>
+          </div>
+        </div>
+      </nav>
+    
+    <!-- container -->
+    <div class="row" style="background-image: url('https://www.wallpaperflare.com/static/744/426/363/steve-jobs-apple-mac-brand-wallpaper.jpg'); background-size: cover; background-repeat: no-repeat; height: 700px; margin: auto;">
+    </div>
+    <div class="container-fluid px-0">
+        <div class="row" style="height: 1300px; background-color: rgb(246, 243, 243); margin-right: 0;">
+          <div class="col-12 container-fluid">
+              <!-- phân trang -->
+              <div class="row bg-light pe-0 pt-5" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); ">
+                      <div class="hideFilter col-2 fs-5 d-flex justify-content-center align-items-center" style="height: 70px;border-top: 1px solid rgb(198, 197, 197);">
+                          HIDE FILTERS
+                      </div>
+                      <div class="col-6" style="border-top: 1px solid rgb(198, 197, 197);"></div>
+                      <div class="col-2"style="border-top: 1px solid rgb(198, 197, 197);">
+                        <div class="d-flex align-items-center justify-content-center" style="height: 100%;" id="paging"></div>
+                      </div>
+                      <div class="col-2 px-0">
+                        <!-- Button trigger modal create -->
+                        <button style="width: 100%; height: 100%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Create new product
+                        </button>
+                      </div>
+              </div>
+
+              <div class="row" style="height: 600px;">
+                <div class="col-3">
+                  <div class="row pt-3 ps-5" style="height: 100%;">
+                    <div class="col-12 category" style="height: 100%;">
+                      <form class="d-flex mt-5" role="search" onsubmit="loadProducts(); return false;">
+                        <input class="form-control me-2 rounded-pill" id="search" name="search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-primary rounded-pill" type="submit">Search</button>
+                      </form>
+                      <div class="pt-4"><h1 class="fs-5 fw-bold">Type</h1></div>
+                      <div class="py-4 ps-3">
+                        <label class="newSale">New
+                          <input type="checkbox" checked="checked">
+                          <span class="checkmark"></span>
+                        </label>
+                        <label class="newSale">Sale
+                          <input type="checkbox">
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <hr style="border-top: 1px dotted rgb(113, 112, 112);">
+                      <div>
+                        <div class="pt-4">
+                          <h1 class="fs-5 fw-bold">Iphone</h1>
+                        </div>
+                        <div class="py-4 ps-3">
+                          <label class="newSale">Iphone 14
+                            <input type="checkbox" name="iphone14">
+                            <span class="checkmark"></span>
+                          </label>
+                          <label class="newSale">Iphone 13
+                            <input type="checkbox" name="iphone14">
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="pt-4">
+                          <h1 class="fs-5 fw-bold">Imac</h1>
+                        </div>
+                        <div class="py-4 ps-3">
+                          <label class="newSale">Macbook pro
+                            <input type="checkbox" name="iphone14">
+                            <span class="checkmark"></span>
+                          </label>
+                          <label class="newSale">Macbook air
+                            <input type="checkbox" name="iphone14">
+                            <span class="checkmark"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-9">
+                  <div id="listProduct" class="d-flex mx-0"></div>
+                </div>
+              
+              </div>
+
+              <div class="row mt-5" style="height: 200px;">
+                <div class="col-12 content-wrapper">
+                  <div class="text-center" style="font-size: 40px; padding-top: 140px; font-family: sans-serif;">Why Apple is the&nbsp;best place to&nbsp;buy iPhone.</div>
+                  <p class="fs-5" style="text-align: center; max-width: 50%; margin-left: 350px;">You can choose a payment option that works for you, pay less with a trade‑in, connect your new iPhone to your carrier, and get set up quickly.
+                    You can also chat with a Specialist anytime.</p>
+                </div>
+              </div>
+          </div>
+      </div>    
+    </div>
+    
+    <!-- footer -->
+    <footer class="relative bg-blueGray-200 pt-8 pb-6">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap text-left lg:text-left">
+          <div class="w-full lg:w-6/12 px-4">
+            <h4 class="text-3xl fonat-semibold text-blueGray-700">Let's keep in touch!</h4>
+            <h5 class="text-lg mt-0 mb-2 text-blueGray-600">
+              Find us on any of these platforms, we respond 1-2 business days.
+            </h5>
+            <div class="mt-6 lg:mb-0 mb-6">
+              <button class="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <i class="fab fa-twitter"></i></button><button class="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <i class="fab fa-facebook-square"></i></button><button class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <i class="fab fa-dribbble"></i></button><button class="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <i class="fab fa-github"></i>
+              </button>
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="flex flex-wrap items-top mb-6">
+              <div class="w-full lg:w-4/12 px-4 ml-auto">
+                <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Useful Links</span>
+                <ul class="list-unstyled">
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/presentation?ref=njs-profile">About Us</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://blog.creative-tim.com?ref=njs-profile">Blog</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Github</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Free Products</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
+                <ul class="list-unstyled">
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-6 border-blueGray-300">
+        <div class="flex flex-wrap items-center md:justify-between justify-center">
+          <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+            <div class="text-sm text-blueGray-500 font-semibold py-1">
+              Copyright © <span id="get-current-year">2023</span><a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800" target="_blank">  Apple Inc.
+              <a href="https://www.creative-tim.com?ref=njs-profile" class="text-blueGray-500 hover:text-blueGray-800">Group 2</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal create-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Create product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        <!-- <form id="createNewProduct"> -->
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="productName" class="form-label">Product name</label>
+                    <input type="text" class="form-control" id="productName" aria-describedby="productName">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="price" aria-describedby="price">
+                </div>
+                <div class="mb-3">
+                    <label for="img" class="form-label">Img</label>
+                    <input type="text" class="form-control" id="img" aria-describedby="img">
+                </div>
+                <div class="mb-3">
+                    <label for="describe" class="form-label">Describe</label>
+                    <input type="text" class="form-control" id="describe" aria-describedby="describe">
+                </div>
+                <div class="mb-3">
+                    <label for="dataSize" class="form-label">Data size</label>
+                    <input type="text" class="form-control" id="dataSize" aria-describedby="dataSize">
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="text" class="form-control" id="quantity" aria-describedby="quantity">
+                </div>
+                <div id="madeInCategory"></div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary" onclick="create()">Save changes</button>
+            </div>
+        <!-- </form> -->
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal delete-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="deleteModalLabel">Create product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="deleteProductForm">
+                <div>
+                    Bạn có muốn xóa sản phẩm <span id="deleteProductName"></span> không ?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Delete</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Edit create-->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+          <input type="hidden" id="indexxxx">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editModalLabel">Edit product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="categoryEditInput"></div>
+                <div id="editMadeInCategory"></div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="editProduct" onclick="editProductxxx()" type="button" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+<script src="/jquery-3.6.4.min.js"></script>
+<script src="product.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
