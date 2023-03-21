@@ -149,7 +149,8 @@ const openEdit = (id,name, dateOfBirth, idCard, phoneNumber, address, imgUrl) =>
     }
 
 
-  const actionEdit = (name, dateOfBirth, idCard, phoneNumber, address, imgUrl, position) => {
+  const actionEdit = (name, dateOfBirth, idCard, phoneNumber, address, imgUrl) => {
+    debugger
     let element =`
                 <div class="mb-3">
                     <label for="employeeIdEdit" class="form-label">Employee name</label>
@@ -180,11 +181,10 @@ const openEdit = (id,name, dateOfBirth, idCard, phoneNumber, address, imgUrl) =>
                     <input type="text" class="form-control" id="imgEdit" aria-describedby="imgEdit">
                 </div>
                 `
-                debugger
     $("#menuEdit").html(element);
 }
 
-const addUpdateEmployee = (id,nameEmployee,dateOfBirth,idCard,phoneNumber,address,imgUrl) => {
+const addUpdateEmployee = (id,nameEmployee,dateOfBirth,idCard,phoneNumber,address,imgUrl,position) => {
     $.ajax({
         type: 'PUT',
         url: `http://localhost:8080/apple/employee/${id}`,
