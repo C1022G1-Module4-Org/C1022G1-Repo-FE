@@ -210,7 +210,6 @@ const addUpdateEmployee = (id,nameEmployee,dateOfBirth,idCard,phoneNumber,addres
     }
 
 const deleteEmployee = (nameEmployee, id) => {
-    debugger
     $("#deleteEmployeeName").html(nameEmployee);
     $("#deleteEmployeeForm").click(() => {
         deleteEmployeeButton(id);
@@ -219,7 +218,6 @@ const deleteEmployee = (nameEmployee, id) => {
 }
 
 const deleteEmployeeButton = (id) => {
-    debugger
     $.ajax({
         type: "DELETE",
         url: `http://localhost:8080/apple/employee/${id}`,
