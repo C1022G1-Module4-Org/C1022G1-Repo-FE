@@ -48,7 +48,6 @@ const listEmployee = (data) => {
     `
 
     $("#listEmployee").html(element);
-    debugger
          // Update pagination
      let totalPages = parseInt(data.totalPages);
      let pageNumber = parseInt(data.number);
