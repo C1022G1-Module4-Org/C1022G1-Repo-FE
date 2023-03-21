@@ -24,35 +24,41 @@ const listEmployee = (employees) => {
     let element = ``;
     for (let employee of employees){
         element += `
-        <div class="d-flex justify-content-center container mt-5">
-        <div class="card p-3 bg-white"><i class="fa fa-user-o"></i>
-            <div class="about-employee text-center mt-2"><img src="${employee.imgUrl}" width="100">
-                <div>
-                    <h6> ${employee.name}</h6>
-                    <h6 class="mt-0 text-black-50"></h6>
-                </div>
-            </div>
-            <div class="stats mt-2">
-                <div class="d-flex justify-content-between p-price"> Date Of Birth : ${employee.dateOfBirth}</div>
-                <div class="d-flex justify-content-between p-price"> Id-card : ${employee.idCard}</div>
-                <div class="d-flex justify-content-between p-price"> Phone Number : ${employee.phoneNumber}</div>
-                <div class="d-flex justify-content-between p-price"> Address : ${employee.address}</div>
-                <div class="d-flex justify-content-between p-price"> Position: ${employee.position.name}</div>
-                <div onclick="deleteEmployee('${employee.name}','${employee.id}')" class="d-flex justify-content-between align-item-center p-price">
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        Delete
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editModal">
-                    Edit
-                </button>
-                </div>
-            </div>
-        </div>
-    </div>
-        `
+        <tr>
+            <td>${employee.id}</td>
+            <td>${employee.name}</td>
+            <td>${employee.idCard}</td>
+            <td>${employee.dateOfBirth}</td>
+            <td>${employee.phoneNumber}</td>
+            <td>${employee.address}</td>
+            <td>${employee.position.name}</td>
+            <td>
+                <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editModal"
+                onclick= "openEditModal(${employee.id})" >Edit</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" 
+                onclick= "deleteEmployee('${employee.name}','${employee.id}')" 
+                data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+            </td>
+        </tr>
+    `
+
     $("#listEmployee").html(element);
-    }
-}
+         // Update pagination
+     let totalPages = employees.totalPages;
+     let pageNumber = employees.pageNumber;
+     let pagination = `<li class="page-item ${pageNumber == 0 ? 'disabled' : ''}">
+     <a class="page-link" href="#" onclick="changePage(${pageNumber - 1})">Previous</a></li>`;
+     for (let i = 0; i < totalPages; i++){
+         pagination += `<li class="page-item ${i == pageNumber ? 'active' : ''}">
+         <a class="page-link" href="#" onclick="changePage(${i})">${i + 1}</a></li>`;
+     }
+     pagination += `<li class="page-item ${pageNumber == totalPages - 1 ? 'disabled' : ''}">
+     <a class="page-link" href="#" onclick="changePage(${pageNumber + 1})">Next</a></li>`;
+     $('#pagination').html(pagination);
+ }
+ }
 
 const listPosition = () => {
         $.ajax({
@@ -91,7 +97,9 @@ const addNew = () => {
     addNewEmployee(nameEmployee,idCard,dateofbirth,phoneNumber,address,img,position)
 }
 
+
 const addNewEmployee = (nameEmployee,dateofbirth,idCard,phoneNumber,address,img,position) => {
+    debugger
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/apple/employee`,
@@ -108,13 +116,66 @@ const addNewEmployee = (nameEmployee,dateofbirth,idCard,phoneNumber,address,img,
             position : {id: position}
         }),
         success: (data) => {
-            alert("Thêm thành công")
+            alert("Create success")
         },
         error : (error) => {
             console.log(error);
         }
     })
 }
+
+//==========Edit===========
+
+function openEditModal(name, dateofbirth, idCard, phoneNumber, address, image, position) {
+  
+    document.getElementById("employeeName").value = name;
+    document.getElementById("dateofbirth").value = dateofbirth;
+    document.getElementById("idCard").value = idCard;
+    document.getElementById("phoneNumber").value = phoneNumber;
+    document.getElementById("address").value = address;
+    document.getElementById("image").value = image;
+    document.getElementById("listPositionCategory").value = ('#listPositionValue').val(position);
+
+    // Open the modal
+    $('#editModal').modal('show');
+  }
+
+  function saveChanges() {
+    // Get the employee data from the modal fields
+    let nameEmployee = $('#employeeName').val();
+    let idCard = $('#idCard').val();
+    let dateofbirth = $('#dateofbirth').val();
+    let img = $('#img').val();
+    let phoneNumber = $('#phoneNumber').val();
+    let address = $('#address').val();
+    let position = $('#listPositionValue').val();
+    addUpdateEmployee(nameEmployee,idCard,dateofbirth,phoneNumber,address,img,position)
+}
+
+const addUpdateEmployee = (nameEmployee,dateofbirth,idCard,phoneNumber,address,img,position) => {
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:8080/apple/employee/' + id,
+        data: JSON.stringify({
+            name: nameEmployee,
+            dateOfBirth: dateofbirth,
+            idCard: idCard,
+            imgUrl: img,
+            phoneNumber: phoneNumber,
+            address: address,
+            position : {id: position}
+        }),
+        success: (data) =>{
+            alert("Update success")
+          // Close the edit modal
+          $('#editModal').modal('hide');
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+    }
+
 const deleteEmployee = (nameEmployee, id) => {
     debugger
     $("#deleteEmployeeName").html(nameEmployee);
@@ -134,7 +195,8 @@ const deleteEmployeeButton = (id) => {
         },
         
         success: (data) => {
-            console.log("Xóa thành công");
+            alert("Delete success")
+            $('#deleteModal').modal('hide');
         },
         error: (error) => {
             console.log(error);
