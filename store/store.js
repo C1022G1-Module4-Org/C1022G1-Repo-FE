@@ -119,7 +119,6 @@ $('#deleteStore').submit(
 
 // add 
 $("#addStore").submit(function (event) {
-    debugger
     event.preventDefault();
     let name = $("#name").val();
     let address = $("#address").val();
@@ -132,7 +131,6 @@ $("#addStore").submit(function (event) {
 )
 
 function addStore(name, address, city, email, phone, storeTypeDTO) {
-    debugger
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/store`,
@@ -240,7 +238,6 @@ function updateStore(id, name, address, city, email, phone, storeTypeDTO) {
 }
 
 function getStoreInfo(id) {
-    debugger
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/store/detail/${id}`,
@@ -251,7 +248,6 @@ function getStoreInfo(id) {
         success: function (data) {
             selectOptionStore();
             let store = data;
-            debugger
             let elements = "";
             elements += `
 
