@@ -19,10 +19,10 @@ const loadEmployee = () => {
     })
 }
 
-const listEmployee = (employees) => {
+const listEmployee = (data) => {
     listPosition();
     let element = ``;
-    for (let employee of employees){
+    for (let employee of data){
         element += `
         <tr>
             <td>${employee.id}</td>
@@ -34,7 +34,10 @@ const listEmployee = (employees) => {
             <td>${employee.position.name}</td>
             <td>
                 <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editModal"
-                onclick= "openEditModal(${employee.id})" >Edit</button>
+                onclick= "openEditModal(
+                    '${employee.id}','${employee.name}','${employee.idCard}',
+                    '${employee.dateOfBirth}','${employee.phoneNumber}','${employee.address}'
+                    )" >Edit</button>
             </td>
             <td>
                 <button type="button" class="btn btn-danger" 
@@ -45,9 +48,10 @@ const listEmployee = (employees) => {
     `
 
     $("#listEmployee").html(element);
+    debugger
          // Update pagination
-     let totalPages = employees.totalPages;
-     let pageNumber = employees.pageNumber;
+     let totalPages = parseInt(data.totalPages);
+     let pageNumber = parseInt(data.number);
      let pagination = `<li class="page-item ${pageNumber == 0 ? 'disabled' : ''}">
      <a class="page-link" href="#" onclick="changePage(${pageNumber - 1})">Previous</a></li>`;
      for (let i = 0; i < totalPages; i++){
@@ -84,6 +88,9 @@ const showListPosition = (listPositionCategory) => {
     }
     element += `</select>`
     $("#listPositionCategory").html(element);
+    $("#editListPosition").html(element);
+
+
 }
 
 const addNew = () => {
@@ -94,12 +101,11 @@ const addNew = () => {
     let phoneNumber = $('#phoneNumber').val();
     let address = $('#address').val();
     let position = $('#listPositionValue').val();
-    addNewEmployee(nameEmployee,idCard,dateofbirth,phoneNumber,address,img,position)
+    addNewEmployee(nameEmployee,dateofbirth,idCard,phoneNumber,address,img,position)
 }
 
 
 const addNewEmployee = (nameEmployee,dateofbirth,idCard,phoneNumber,address,img,position) => {
-    debugger
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/apple/employee`,
@@ -110,9 +116,9 @@ const addNewEmployee = (nameEmployee,dateofbirth,idCard,phoneNumber,address,img,
             name : nameEmployee,
             dateOfBirth : dateofbirth,
             idCard: idCard,
-            imgUrl : img,
             phoneNumber : phoneNumber,
             address :address,
+            imgUrl : img,
             position : {id: position}
         }),
         success: (data) => {
@@ -125,49 +131,76 @@ const addNewEmployee = (nameEmployee,dateofbirth,idCard,phoneNumber,address,img,
 }
 
 //==========Edit===========
+ 
 
-function openEditModal(name, dateofbirth, idCard, phoneNumber, address, image, position) {
-  
-    document.getElementById("employeeName").value = name;
-    document.getElementById("dateofbirth").value = dateofbirth;
-    document.getElementById("idCard").value = idCard;
-    document.getElementById("phoneNumber").value = phoneNumber;
-    document.getElementById("address").value = address;
-    document.getElementById("image").value = image;
-    document.getElementById("listPositionCategory").value = ('#listPositionValue').val(position);
+const openEdit = (id,name, dateOfBirth, idCard, phoneNumber, address, imgUrl) =>{
+    actionEdit(name, dateOfBirth, idCard, phoneNumber, address, imgUrl);
+    $('#indexFind').val(id);}
 
-    // Open the modal
-    $('#editModal').modal('show');
-  }
+    const openEditModal = () => {
+        let id = $('#indexFind').val();
+        let name = $('#employeeNameEdit').val();
+        let dateOfBirth = $('#dateofbirthEdit').val();
+        let idCard = $('#idCardEdit').val();
+        let phoneNumber = $('#phoneEdit').val();
+        let address = $('#addressEdit').val();
+        let imgUrl = $('#imgEdit').val();
+        addUpdateEmployee(id,name,dateOfBirth,idCard,phoneNumber,address,imgUrl)
+    }
 
-  function saveChanges() {
-    // Get the employee data from the modal fields
-    let nameEmployee = $('#employeeName').val();
-    let idCard = $('#idCard').val();
-    let dateofbirth = $('#dateofbirth').val();
-    let img = $('#img').val();
-    let phoneNumber = $('#phoneNumber').val();
-    let address = $('#address').val();
-    let position = $('#listPositionValue').val();
-    addUpdateEmployee(nameEmployee,idCard,dateofbirth,phoneNumber,address,img,position)
+
+  const actionEdit = (name, dateOfBirth, idCard, phoneNumber, address, imgUrl) => {
+    debugger
+    let element =`
+                <div class="mb-3">
+                    <label for="employeeIdEdit" class="form-label">Employee name</label>
+                    <input type="text" class="form-control" id="employeeIdEdit" aria-describedby="employeeIdEdit">
+                </div>      
+                <div class="mb-3">
+                    <label for="employeeNameEdit" class="form-label">Employee name</label>
+                    <input type="text" class="form-control" id="employeeNameEdit" aria-describedby="employeeNameEdit">
+                </div>      
+                <div class="mb-3">
+                    <label for="dateofbirthEdit" class="form-label">Date of Birth</label>
+                    <input type="text" class="form-control" id="dateofbirthEdit" aria-describedby="dateofbirthEdit">
+                </div>
+                <div class="mb-3">
+                    <label for="idCardEdit" class="form-label">ID Card</label>
+                    <input type="text" class="form-control" id="idCardEdit" aria-describedby="idCardEdit">
+                </div>
+                <div class="mb-3">
+                    <label for="phoneEdit" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneEdit" aria-describedby="phoneEdit">
+                </div>
+                <div class="mb-3">
+                    <label for="addressEdit" class="form-label">Address :</label>
+                    <input type="text" class="form-control" id="addressEdit" aria-describedby="addressEdit">
+                </div>
+                <div class="mb-3">
+                    <label for="imgEdit" class="form-label">Img</label>
+                    <input type="text" class="form-control" id="imgEdit" aria-describedby="imgEdit">
+                </div>
+                `
+    $("#menuEdit").html(element);
 }
 
-const addUpdateEmployee = (nameEmployee,dateofbirth,idCard,phoneNumber,address,img,position) => {
+const addUpdateEmployee = (id,nameEmployee,dateOfBirth,idCard,phoneNumber,address,imgUrl,position) => {
     $.ajax({
         type: 'PUT',
-        url: 'http://localhost:8080/apple/employee/' + id,
+        url: `http://localhost:8080/apple/employee/${id}`,
         data: JSON.stringify({
             name: nameEmployee,
-            dateOfBirth: dateofbirth,
+            dateOfBirth: dateOfBirth,
             idCard: idCard,
-            imgUrl: img,
+            imgUrl: imgUrl,
             phoneNumber: phoneNumber,
             address: address,
-            position : {id: position}
+            position: {id:position}
         }),
         success: (data) =>{
             alert("Update success")
           // Close the edit modal
+          loadEmployee();
           $('#editModal').modal('hide');
         },
         error: (error) => {
