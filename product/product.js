@@ -3,17 +3,17 @@ $(document).ready(() => {
 })
 
 
-const loadProducts = () => {
-    debugger
+const loadProducts = (nextPage) => {
     let keySearch = $("#search").val();
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/apple/product?search=`+keySearch,
+        url: `http://localhost:8080/apple/product?page=${nextPage ? nextPage : "0"}&search=`+keySearch,
         headers:{
             "Content-Type":"application/JSON",
         },
         success: (data) => {
             listProduct(data.content);
+            renderPage(data);
         },
         error: (error) => {
             console.log(error);
@@ -26,6 +26,7 @@ const listProduct = (products) => {
     let element = ``;
     for (let product of products){
         element += `
+        <div>
         <div class="d-flex justify-content-center container mt-5">
         <div class="card p-3 bg-white"><i class="fa fa-apple"></i>
             <div class="about-product text-center mt-2"><img src="${product.img}" width="300">
@@ -41,12 +42,12 @@ const listProduct = (products) => {
                 <div class="d-flex justify-content-between p-price">${product.quantity}</div>
                 <div class="d-flex justify-content-between p-price">Place made: ${product.madeIn.placeMadeIn}</div>
                 <div class="d-flex">
-                    <div onclick="editProduct('${product.id}','${product.name}','${product.img}','${product.describeProduct}','${product.price}','${product.dateSize}','${product.quantity}')" class="d-flex justify-content-between align-item-center p-price">
+                    <div class="pt-2 mx-5" onclick="editProduct('${product.id}','${product.name}','${product.img}','${product.describeProduct}','${product.price}','${product.dateSize}','${product.quantity}')" class="d-flex justify-content-between align-item-center p-price">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
                             Edit
                         </button>
                     </div>
-                    <div onclick="deleteProduct('${product.name}','${product.id}')" class="d-flex justify-content-between align-item-center p-price">
+                    <div class="pt-2" onclick="deleteProduct('${product.name}','${product.id}')" class="d-flex justify-content-between align-item-center p-price">
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                             Delete
                         </button>
@@ -55,9 +56,69 @@ const listProduct = (products) => {
             </div>
         </div>
     </div>
+    <div class="mt-5 d-flex justify-content-center">
+                  <div class="card-voucher voutchers">
+    
+                    <div class="voutcher-divider">
+    
+                      <div class="voutcher-left text-center">
+                        <span class="voutcher-name">Monday Happy</span>
+                        <h5 class="voutcher-code">#MONHPY</h5>
+                        
+                      </div>
+                      <div class="voutcher-right text-center border-left">
+                        <h5 class="discount-percent pb-2">20%</h5>
+                        <span class="off">Off</span>
+                        
+                      </div>
+                        
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+        </div>
         `
     $("#listProduct").html(element);
     }
+}
+
+function movePage(nextPage) {
+    loadProducts(nextPage);
+}
+
+function renderPage(products) {
+    let page = "";
+    if (products.number == products.totalPages - 1 && products.number > 0) {
+        page += `
+    <button class="page-item btn" 
+    onclick="movePage(${products.number - 1})">
+    <i style="color: black" class="bi bi-caret-right-fill"></i>
+    </button>
+    `
+    }
+    for (let i = 1; i <= products.totalPages; i++) {
+        let pageItem = $(`<button class="page-item number btn mx-1"
+                      onclick="movePage(${i - 1})">
+                      ${i}
+                      </button>`);
+        if (i === products.number + 1) {
+            pageItem.addClass("active");
+        } else {
+            pageItem.removeClass("active");
+        }
+        page += pageItem.prop('outerHTML');
+    }
+
+    if (products.number == 0 && products.number < products.totalPages) {
+        page += `
+    <button class="page-item btn" 
+    onclick="movePage(${products.number + 1})">
+    <i class="ti-angle-right"></i>
+    </button>
+    `
+    }
+    $("#paging").html(page);
 }
 
 const listMadeIn = () => {
@@ -100,7 +161,6 @@ const create = () => {
 }
 
 const addNewProduct = (nameProduct,price,img,describeProduct,dataSize,quantity,madeInProduct) => {
-    debugger
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/apple/product`,
@@ -158,17 +218,27 @@ const deleteProductButton = (id) => {
 
 const editProduct = (id,name,img,describe,price,dataSize,quantity) => {
     categoryEdit(name,img,describe,price,dataSize,quantity);
-    $("#editProduct").click(() => {
-        let nameProduct = $('#editProductName').val();
-        let priceProduct = $('#editPrice').val();
-        let imgProduct = $('#editImg').val();
-        let describeProduct = $('#editDescribe').val();
-        let dataSizeProduct = $('#editDataSize').val();
-        let quantityProduct = $('#editQuantity').val();
-        let madeInProduct = $('#madeInValue').val();
-        editProductButton(id,nameProduct,imgProduct,priceProduct,describeProduct,dataSizeProduct,quantityProduct,madeInProduct);
-    })
+    $('#indexxxx').val(id);
+    
 }
+
+
+const editProductxxx = () => {
+    let id = $('#indexxxx').val();
+    let nameProduct = $('#editProductName').val();
+    let priceProduct = $('#editPrice').val();
+    let imgProduct = $('#editImg').val();
+    let describeProduct = $('#editDescribe').val();
+    let dataSizeProduct = $('#editDataSize').val();
+    let quantityProduct = $('#editQuantity').val();
+    let madeInProduct = $('#madeInValue').val();
+    editProductButton(id,nameProduct,imgProduct,priceProduct,describeProduct,dataSizeProduct,quantityProduct,madeInProduct);
+}
+
+
+
+
+
 
 const categoryEdit = (name,img,describe,price,dataSize,quantity) => {
     let element =`
