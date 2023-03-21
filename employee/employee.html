@@ -67,8 +67,8 @@
                     <input type="text" class="form-control" id="idCard" aria-describedby="idCard">
                 </div>
                 <div class="mb-3">
-                    <label for="phone" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" id="phone" aria-describedby="phone">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber" aria-describedby="phoneNumber">
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Address :</label>
@@ -85,6 +85,26 @@
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="addNew()">Save changes</button>
             </div>
         <!-- </form> -->
+        </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editModalLabel">Edit product</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        <form id="editProduct">
+            <div class="modal-body">
+                <div id="menuEdit"></div>
+                <div id="editListPosition"></div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
         </div>
         </div>
     </div>
