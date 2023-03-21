@@ -32,6 +32,10 @@ function renderStores(storeList) {
                 <td>${store.city}</td>
                 <td>${store.storeTypeDTO.type}</td>
                 <td>
+                    <button type="button" class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#modalDetail"
+                    // onclick= "getStoreInfo(${store.id})" >Detail</button>
+                </td>
+                <td>
                     <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modalUpdate"
                     onclick= "getStoreInfo(${store.id})" >Edit</button>
                 </td>
@@ -115,6 +119,7 @@ $('#deleteStore').submit(
 
 // add 
 $("#addStore").submit(function (event) {
+    debugger
     event.preventDefault();
     let name = $("#name").val();
     let address = $("#address").val();
@@ -127,6 +132,7 @@ $("#addStore").submit(function (event) {
 )
 
 function addStore(name, address, city, email, phone, storeTypeDTO) {
+    debugger
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/store`,
@@ -152,6 +158,7 @@ function addStore(name, address, city, email, phone, storeTypeDTO) {
     })
 }
 function selectOptionStore() {
+    debugger
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/type`,
@@ -168,6 +175,7 @@ function selectOptionStore() {
 }
 
 function storeOption(storeTypes) {
+    debugger
     let elements = "";
     elements += `
         <select class="form-control" id="selectStore">`
@@ -246,7 +254,7 @@ function getStoreInfo(id) {
             debugger
             let elements = "";
             elements += `
-            
+
         <div class="form-group">
             <input type="text"
                 class="form-control" id="id-update" value="${store.id}">
@@ -289,3 +297,61 @@ function getStoreInfo(id) {
     })
 }
 
+// detail
+// function detailStore(id) {
+//     debugger
+//     $.ajax({
+//         type: "GET",
+//         url: `http://localhost:8080/store/${id}`,
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         success: function (data) {
+//             debugger
+//             store = data
+//             let elements = "";
+//             elements = `
+//             <div class="form-group">
+//             <input type="text"
+//                 class="form-control" id="id-detail" value="${store.id}">
+//         </div>
+//         <div class="form-group">
+//                 <label for="name-detail">Name</label>
+//                 <input type="text" class="form-control" id="name-detail" value="${store.name}">
+//         </div>
+//         <div class="form-group">
+//                 <label for="address-detail">address</label>
+//                 <input type="text" class="form-control" id="address-detail" value="${store.address}">
+//         </div>
+//         <div class="form-group">
+//                 <label for="city-detail">city</label>
+//                 <input type="text" class="form-control" id="city-detail" value="${store.city}">
+//         </div>
+//         <div class="form-group">
+//                 <label for="email-detail">email</label>
+//                 <input type="text" class="form-control" id="email-detail" value="${store.email}">
+//         </div>
+//         <div class="form-group">
+//                 <label for="phone-detail">phone</label>
+//                 <input type="text" class="form-control" id="phone-detail" value="${store.phone}">
+//         </div>
+//         // <div class="form-group">
+//         // <label for="type-detail">Type</label>
+//         // <input type="text" class="form-control" id="type-detail" value="${store.storeTypeDTO}">
+//         // </div>
+//         <div class="modal-footer">
+//             <button type="submit" class="btn btn-primary" data-dismiss="modal">Close</button>
+//             </div>
+//             `
+//             debugger
+//             $("#detailStore").html(elements)
+//         },
+//         error: function (error) {
+//             console.log("error");
+//         }
+//     })
+// }
+// $(document).ready(function () {
+//     debugger
+//     detailStore();
+// });
