@@ -25,8 +25,25 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Create new Employee
     </button>
-    <div id="listEmployee" class="d-flex"></div>
-
+    <!-- <div id="listEmployee" class="d-flex"></div> -->
+    <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>ID Card</th>
+            <th>Phone Number<th>
+            <th>Address</th>
+            <th>Position<th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="listEmployee" class="text-center">
+        </tbody>
+    </table>
+    <div id="pagination"></div>
     <!-- Modal create-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -40,7 +57,7 @@
                 <div class="mb-3">
                     <label for="employeeName" class="form-label">Employee name</label>
                     <input type="text" class="form-control" id="employeeName" aria-describedby="employeeName">
-                </div>
+                </div>      
                 <div class="mb-3">
                     <label for="dateofbirth" class="form-label">Date of Birth</label>
                     <input type="text" class="form-control" id="dateofbirth" aria-describedby="dateofbirth">
@@ -71,6 +88,7 @@
         </div>
         </div>
     </div>
+    
     <!-- Modal delete-->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -94,50 +112,4 @@
 </body>
 <script src="/jquery-3.6.4.min.js"></script>
 <script src="employee.js"></script>
-
- <!-- Modal Edit-->
- <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Employee</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-    <!-- <form id="createNewEmployee"> -->
-        <div class="modal-body">
-            <div class="mb-3">
-                <label for="employeeName" class="form-label">Employee name</label>
-                <input type="text" class="form-control" id="employeeName" aria-describedby="employeeName">
-            </div>
-            <div class="mb-3">
-                <label for="dateofbirth" class="form-label">Date of Birth</label>
-                <input type="text" class="form-control" id="dateofbirth" aria-describedby="dateofbirth">
-            </div>
-            <div class="mb-3">
-                <label for="idcard" class="form-label">ID Card</label>
-                <input type="text" class="form-control" id="idcard" aria-describedby="idcard">
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">Phone Number</label>
-                <input type="text" class="form-control" id="phone" aria-describedby="phone">
-            </div>
-            <div class="mb-3">
-                <label for="address" class="form-label">Address :</label>
-                <input type="text" class="form-control" id="address" aria-describedby="address">
-            </div>
-            <div class="mb-3">
-                <label for="img" class="form-label">Img</label>
-                <input type="text" class="form-control" id="img" aria-describedby="img">
-            </div>
-            <div id="listPositionCategory"></div>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="addNew()">Save changes</button>
-        </div>
-    <!-- </form> -->
-    </div>
-    </div>
-</div>
-
 </html>
