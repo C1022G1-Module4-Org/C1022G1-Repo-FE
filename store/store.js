@@ -132,6 +132,7 @@ $("#addStore").submit(function (event) {
 )
 
 function addStore(name, address, city, email, phone, storeTypeDTO) {
+    debugger
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/store`,
@@ -157,6 +158,7 @@ function addStore(name, address, city, email, phone, storeTypeDTO) {
     })
 }
 function selectOptionStore() {
+    debugger
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/type`,
@@ -173,6 +175,7 @@ function selectOptionStore() {
 }
 
 function storeOption(storeTypes) {
+    debugger
     let elements = "";
     elements += `
         <select class="form-control" id="selectStore">`
@@ -251,7 +254,7 @@ function getStoreInfo(id) {
             debugger
             let elements = "";
             elements += `
-            
+
         <div class="form-group">
             <input type="hidden"
                 class="form-control" id="id-update" value="${store.id}">
