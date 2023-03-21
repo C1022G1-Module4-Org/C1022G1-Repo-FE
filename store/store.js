@@ -219,7 +219,7 @@ function updateStore(id, name, address, city, email, phone, storeTypeDTO) {
         }),
         success: function (data) {
             alert("Update success!")
-            $("#update").hide();
+            $("#modalUpdate").hide();
             $("body").removeClass("modal-open");
             $('.modal-backdrop').remove();
             loadStores();
@@ -243,49 +243,47 @@ function getStoreInfo(id) {
         success: function (data) {
             selectOptionStore();
             let store = data;
+            debugger
             let elements = "";
             elements += `
-            <div class="form-group">
-                <input type="hidden"
-                     class="form-control" id="id-update" value="${store.id}">
-            </div>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text"
-                    class="form-control" name="name-update" id="name-update" aria-describedby="helpId" placeholder="" value="${store.name}>
-            </div>
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text"
-                     class="form-control" name="address-update" id="address-update" aria-describedby="helpId" placeholder="" value="${store.address}>
-            </div>
-            <div class="form-group">
-                <label for="city">City</label>
-                <input type="text"
-                    class="form-control" name="city-update" id="city-update" aria-describedby="helpId" placeholder="" value="${store.city}>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text"
-                    class="form-control" name="email-update" id="email-update" aria-describedby="helpId" placeholder="" value="${store.email}>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text"
-                    class="form-control" name="phone-update" id="phone-update" aria-describedby="helpId" placeholder="" value="${store.phone}>
-            </div>
-            <div class="form-group">
-                <label for="type">Type</label>
-                <div id="type-update"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary" >Update</button>
-            </div>
+            
+        <div class="form-group">
+            <input type="text"
+                class="form-control" id="id-update" value="${store.id}">
+        </div>
+        <div class="form-group">
+                <label for="name-update">Name</label>
+                <input type="text" class="form-control" id="name-update" value="${store.name}">
+        </div>
+        <div class="form-group">
+                <label for="address-update">address</label>
+                <input type="text" class="form-control" id="address-update" value="${store.address}">
+        </div>
+        <div class="form-group">
+                <label for="city-update">city</label>
+                <input type="text" class="form-control" id="city-update" value="${store.city}">
+        </div>
+        <div class="form-group">
+                <label for="email-update">email</label>
+                <input type="text" class="form-control" id="email-update" value="${store.email}">
+        </div>
+        <div class="form-group">
+                <label for="phone-update">phone</label>
+                <input type="text" class="form-control" id="phone-update" value="${store.phone}">
+        </div>
+        <div class="form-group">
+        <label for="type-update">Type</label>
+        <div id="type-update">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" >Update</button>
+        </div>
             `
+            debugger
             $("#update-performing").html(elements);
         },
-        error: function (error) {
+        error: function (error) {   
             alert("error");
         }
     })
