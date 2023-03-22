@@ -12,7 +12,7 @@ function loadStores(page) {
             renderPage(data);
         },
         error: function (error) {
-            console.log(error);
+            alert(error);
         }
     })
 }
@@ -55,7 +55,7 @@ function movePage(page) {
 function renderPage(storeList) {
     let pageable = "";
     if (
-        storeList.number == storeList.totalPages - 1 &&
+        storeList.number <= storeList.totalPages - 1 &&
         storeList.number > 0
     ) {
         pageable += `
@@ -76,7 +76,7 @@ function renderPage(storeList) {
         }
         pageable += page.prop("outerHTML");
     }
-    if (storeList.number == 0 && storeList.number < storeList.totalPages) {
+    if (storeList.number >= 0 && storeList.number < storeList.totalPages - 1) {
         pageable += `
         <button class="btn btn-secondary" onclick="movePage(${storeList.number + 1})">
         Next
@@ -104,7 +104,7 @@ function deleteStore(id) {
             loadStores();
         },
         error: function (error) {
-            console.log(error);
+            alert(error);
         }
     })
 }
@@ -149,11 +149,16 @@ function addStore(name, address, city, email, phone, storeTypeDTO) {
             storeTypeDTO: { idType: storeTypeDTO },
         }),
         success: function (data) {
-            console.log("success")
+            alert("success")
             window.location.replace("store.html");
         },
         error: function (error) {
-            console.log(error);
+            for(let key of Object.keys(error.responseJSON)){
+                if($(`#${key}-error`)){
+                    $(`#${key}-error`).text(error.responseJSON[key]);
+                }
+            }
+            alert("error");
         },
     })
 }
@@ -169,7 +174,7 @@ function selectOptionStore() {
             storeOption(data);
         },
         error: function (error) {
-            console.log(error);
+            alert("error");
         }
     })
 }
@@ -234,9 +239,14 @@ function updateStore(id, name, address, city, email, phone, storeTypeDTO) {
     
         },
         error: function (error) {
+            for(let key of Object.keys(error.responseJSON)){
+                if($(`#${key}-error`)){
+                    $(`#${key}-error`).text(error.responseJSON[key]);
+                }
+            }
             alert("error");
         },
-    })
+    });
 }
 
 function getStoreInfo(id) {
