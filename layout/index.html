@@ -1,150 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-
-    <head>
-
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Apple Management</title>
-
-        <!-- CSS -->        
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Roboto:300,400,500">
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
-        <!-- Favicon and touch icons -->
-        <link rel="shortcut icon" href="assets/ico/favicon.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
-    </head>
-
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/layout/assets/css/style.css">
+    <link rel="stylesheet" href="/layout/assets/css/animate.css">
+    <title>Apple</title>
+</head>
+<body>
+    <!-- Top menu -->
+    <nav class="navbar navbar-expand-lg navbar-inverse navbar-fixed-top px-1 py-0 fixed-top bg-blueGray-200">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="/layout/assets/img/logo@2x.png" alt="">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link active text-center" aria-current="page" href="#">Apple</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="/product/product.html">Product</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="#">Employee</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="#">Customer</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="#">Store</a>
+              </li>
+              <li class="nav-item mx-1" style="width: 90px;">
+                <a class="nav-link text-center" href="#">Contact</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <div class="nav-item mx-2">
+                    <a class="nav-link fw-bold" href="#" style="color: grey;">Sign in</a>
+                </div>
+                <div class="nav-item bg-primary rounded-pill mx-2">
+                    <a class="nav-link text-white" href="#">Sign up</a>
+                </div>
+            </form>
+          </div>
+        </div>
+    </nav>
     
-    	<!-- Top menu -->
-		<nav class="navbar navbar-inverse navbar-fixed-top navbar-no-bg" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="index.html">Apple Management</a>
-				</div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="top-navbar-1">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Memmber</a></li>
-						<li><a href="#">Employee</a></li>
-						<li><a href="#">Bill</a></li>
-						<li><a href="#">Product</a></li>
-						<li><a class="btn btn-link-3" href="#">Login</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-    
-    	<!-- Top content -->
-        <div class="top-content">
-        	<div class="container">
-				<div class="row">
-					<div class="col-sm-12 text wow fadeInLeft">
-						<h1>Niềm hạnh phúc của bạn là niềm vinh dự của chúng tôi</h1>
-						<div class="description">
-							<p class="medium-paragraph">
-								Nhà cung cấp uy tín - Cách tối ưu hóa doanh số và nâng cao trải nghiệm khách hàng
-							</p>
-						</div>
-					</div>
-				</div>
-            </div>
+    <!-- container -->
+    <div id="myCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+      <div class="carousel-inner">
+          <div class="carousel-item active">
+              <div class="mask flex-center">
+                  <div class="container" style="margin-top: 200px;">
+                      <div class="row align-items-center">
+                          <div class="col-md-7 col-12 order-md-1 order-2">
+                              <h4>Iphone 14</h4>
+                              <p>It’s integrated throughout iOS — and works with lots of different apps — to seamlessly surface what you need, right when you need it.</p> <br> <a href="#">BUY NOW</a>
+                          </div>
+                          <div class="col-md-5 col-12 order-md-2 order-1"><img src="https://www.apple.com/v/iphone-14-pro/d/images/key-features/features/dynamic-island/dd_dynamic_island_notify_v__gdxu3q8ym82u_large.jpg" class="mx-auto" alt="slide"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <div class="row mt-3 me-0">
+    <div class="col-6 ps-3 position-relative">
+      <img src="https://www.apple.com/v/home/ay/images/promos/apple-watch-series-8/promo_apple_watch_series_8_spring__d9hfvufh7hyu_large.jpg" style="height: 450px;" alt="">
+      <img height="100px" width="100px" class="position-absolute" style="top: 14%; left: 40%; transform: translate(-50%, -50%); color: white; font-family: sans-serif;" src="./assets/img/Thiết kế chưa có tên (1).png" alt="">
+      <div class="position-absolute" style="top: 15%; left: 54%; transform: translate(-50%, -50%); color: white; font-size: 40px; font-family: sans-serif; cursor: pointer;">WATCH</div>
+      <div class="position-absolute" style="top: 25%; left: 50%; transform: translate(-50%, -50%); color: red; font-size: 18px; font-family: sans-serif; cursor: pointer;">Series 8</div>
+      <div class="position-absolute" style="top: 32%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 20px; font-family: sans-serif; cursor: pointer;">A healthy leap ahead.</div>
+    </div>
+    <div class="col-6 pe-3 position-relative">
+      <img src="https://www.apple.com/v/home/ay/images/promos/ipad/promo_ipad__fioegapg12qi_large.jpg" style="height: 450px;" alt="">
+      <div class="position-absolute" style="top: 15%; right: 40%; transform: translate(-50%, -50%); color: black; font-size: 40px; font-family: sans-serif; cursor: pointer;">iPad</div>
+      <div class="position-absolute" style="top: 25%; left: 50%; transform: translate(-50%, -50%); color: black; font-size: 20px; font-family: sans-serif; cursor: pointer;">Lovable. Drawable. Magical</div>
+
+    </div>
+  </div>
+  <div class="row mt-3 me-0 position-relative">
+    <div class="col-6 ps-3">
+      <img src="https://www.apple.com/v/home/ay/images/promos/macbook-pro-14-and-16/promo_mbp__ek7p477bkp6q_large.jpg" style="height: 450px;" alt="">
+      <div class="position-absolute" style="top: 15%; left: 25%; transform: translate(-50%, -50%); color: white; font-size: 40px; font-family: sans-serif; cursor: pointer;">MacBook Pro</div>
+      <div class="position-absolute" style="top: 28%; left: 25%; transform: translate(-50%, -50%); color: white; font-size: 20px; font-family: sans-serif; cursor: pointer;">Supercharged by M2 Pro and M2 Max.</div>
+    </div>
+    <div class="col-6 pe-3">
+      <img src="https://www.apple.com/v/home/ay/images/promos/homepod/promo_homepod__f7jnolq94m2y_large.jpg" style="height: 450px;" alt="">
+      <div class="position-absolute" style="top: 15%; right: 13%; transform: translate(-50%, -50%); color: white; font-size: 40px; font-family: sans-serif; cursor: pointer;">HomePod</div>
+      <div class="position-absolute" style="top: 28%; right: 15%; transform: translate(-50%, -50%); color: white; font-size: 20px; font-family: sans-serif; cursor: pointer;">Profound sound.</div>
+    </div>
+  </div>
+
+  <section id="clients" class="section-bg">
+    <div class="container">
+      <div class="section-header">
+        <h3>Our Stores</h3>
+        <p>Come to our modern store</p>
+      </div>
+
+      <div class="row no-gutters clients-wrap clearfix wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+
+        <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="client-logo">
+            <img src="https://haymora.com/upload/images/ban_le/the_gioi_di_dong/logo.jpg" class="img-fluid" alt="">
+          </div>
         </div>
         
-        <!-- Footer -->
-		
-		<footer>
-			<div></div>
-			<div></div>
-			<ul class="list-inline">
-				<li class="list-inline-item"><i class="fa fa-apple"></i><a href="home"> Home</a></li>
-				<li class="list-inline-item"><i class="fa fa-apple"></i><a href="product"> Products</a></li>
-				<li class="list-inline-item"><i class="fa fa-apple"></i><a href="member"> Members</a></li>
-				<li class="list-inline-item"><i class="fa fa-apple"></i><a href="embloyee"> Employee</a></li>
-				<li class="list-inline-item"><i class="fa fa-apple"></i><a href="bill"> Bills</a></li>
-			</ul>
-		<div class="row">
-			<div class="col-sm-6 features-box wow fadeInLeft">
-				<div class="row">
-					<div class="col-sm-3 features-box-icon">
-						<i class="fa fa-apple"></i>
-					</div>
-					<div class="col-sm-9">
-						<h3>Cửa hàng trực tuyến của Apple</h3>
-						<p>
-							Apple.com là một nơi thuận tiện để mua các sản phẩm và phụ kiện của Apple 
-							từ Apple và các nhà sản xuất khác. Bạn có thể mua trực tuyến hoặc gọi 
-							(0888-888-888).
-							Bạn có thể nhận thông tin về đơn hàng bạn đã đặt trên Cửa hàng trực tuyến 
-							của Apple thông qua trang Trạng thái đơn hàng . Nếu muốn, bạn cũng có thể 
-							nhận trạng thái đơn hàng hoặc thực hiện các thay đổi qua điện thoại tại((0888-888-888).
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 features-box wow fadeInLeft">
-				<div class="row">
-					<div class="col-sm-3 features-box-icon">
-						<i class="fa fa-github"></i>
-					</div>
-					<div class="col-sm-9">
-						<h3>Địa chỉ công ty</h3>
-						<p>
-							Đà Nẵng: Số 280 đường Trần Hưng Đạo, phường An Hải Tây, quận Sơn Trà, ĐN.
-						</p>
-					</div>
-				</div>
-			</div>
-			<div class="footer-basic">
-                <footer>
-                    
-	        <div class="container">
-	        	<div class="row">
-	        		<div class="col-sm-12 footer-copyright">
-                    	&copy; Made by <a href="http://codegym.vn">GROUP 2 C1022G1 CodeGym</a>
-                    </div>
-                </div>
-	        </div>
-        </footer>
-
-
-        <!-- Javascript -->
-        <script src="assets/js/jquery-1.11.1.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/retina-1.1.0.min.js"></script>
-        <script src="assets/js/waypoints.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
+        <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="client-logo">
+            <img src="https://cardy.vn/upload/images/h11/images/logo-diem-uu-dai/640x480/2/cellps.jpg" class="img-fluid" alt="">
+          </div>
+        </div>
+      
+        <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="client-logo">
+            <img src="data:image/png;base64,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" class="img-fluid" alt="">
+          </div>
+        </div>
         
-        <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
+        <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="client-logo">
+            <img src="https://img.ws.mms.shopee.vn/cfaca03d2b7fb16c4323946959ac1b5c" class="img-fluid" alt="">
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="client-logo">
+            <img src="https://media.licdn.com/dms/image/C4E03AQGJeErsZPHz_Q/profile-displayphoto-shrink_800_800/0/1618803461317?e=2147483647&v=beta&t=ChLFKuQGpX9YAuM1vzH7eIsGrOGNvEMXgNj7k0P8T2U" class="img-fluid" alt="">
+          </div>
+        </div>
+      
+        <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="client-logo">
+            <img src="https://img.ws.mms.shopee.vn/8e1414699fa53341c2a61f4af495892a" class="img-fluid" alt="">
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="client-logo">
+            <img src="data:image/png;base64,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" class="img-fluid" alt="">
+          </div>
+        </div>
+        
+        <div class="col-lg-3 col-md-4 col-xs-6">
+          <div class="client-logo">
+            <img src="https://bootstrapmade.com/demo/themes/NewBiz/img/clients/client-8.png" class="img-fluid" alt="">
+          </div>
+        </div>
 
-    </body>
+      </div>
 
+    </div>
+
+  </section>
+    <!-- footer -->
+    <footer class="relative bg-blueGray-200 pt-8 pb-6">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-wrap text-left lg:text-left">
+          <div class="w-full lg:w-6/12 px-4">
+            <h4 class="text-3xl fonat-semibold text-blueGray-700">Let's keep in touch!</h4>
+            <h5 class="text-lg mt-0 mb-2 text-blueGray-600">
+              Find us on any of these platforms, we respond 1-2 business days.
+            </h5>
+            <div class="mt-6 lg:mb-0 mb-6">
+              <button class="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <i class="fab fa-twitter"></i></button><button class="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <i class="fab fa-facebook-square"></i></button><button class="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <i class="fab fa-dribbble"></i></button><button class="bg-white text-blueGray-800 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2" type="button">
+                <i class="fab fa-github"></i>
+              </button>
+            </div>
+          </div>
+          <div class="w-full lg:w-6/12 px-4">
+            <div class="flex flex-wrap items-top mb-6">
+              <div class="w-full lg:w-4/12 px-4 ml-auto">
+                <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Useful Links</span>
+                <ul class="list-unstyled">
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/presentation?ref=njs-profile">About Us</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://blog.creative-tim.com?ref=njs-profile">Blog</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.github.com/creativetimofficial?ref=njs-profile">Github</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile">Free Products</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="w-full lg:w-4/12 px-4">
+                <span class="block uppercase text-blueGray-500 text-sm font-semibold mb-2">Other Resources</span>
+                <ul class="list-unstyled">
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://github.com/creativetimofficial/notus-js/blob/main/LICENSE.md?ref=njs-profile">MIT License</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/terms?ref=njs-profile">Terms &amp; Conditions</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/privacy?ref=njs-profile">Privacy Policy</a>
+                  </li>
+                  <li>
+                    <a class="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://creative-tim.com/contact-us?ref=njs-profile">Contact Us</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-6 border-blueGray-300">
+        <div class="flex flex-wrap items-center md:justify-between justify-center">
+          <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+            <div class="text-sm text-blueGray-500 font-semibold py-1">
+              Copyright © <span id="get-current-year">2023</span><a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800" target="_blank">  Apple Inc.
+              <a href="https://www.creative-tim.com?ref=njs-profile" class="text-blueGray-500 hover:text-blueGray-800">Group 2</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+<script>
+  $(document).ready(function(){
+    
+    $('#myCarousel').carousel({
+    interval: 3000,
+ }) 
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/jquery-3.6.4.min.js"></script>
+</body>
 </html>
