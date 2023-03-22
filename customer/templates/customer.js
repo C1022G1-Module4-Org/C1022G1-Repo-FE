@@ -1,8 +1,9 @@
 function loadCustomers(page) {
+    let search = $("#search").val();
 
     $.ajax({
         type: "GET",
-        url: `http://localhost:8080/customer?page=${page ? page : "0"}`,
+        url: `http://localhost:8080/customer?page=${page ? page : "0"}&name=${search}`,
         header: {
             contentType: 'application/json',
         },
@@ -63,74 +64,82 @@ function getCustomerInfoUpdate(id) {
             "Content-Type": "application/json",
         },
         type: "get",
-        url: `http://localhost:8080/customer/`+ id,
+        url: `http://localhost:8080/customer/` + id,
         success: function (data) {
             listAllType();
             let element = "";
             let customer = data;
             element +=
                 `
-             <div>
-                        <input type="hidden" id="id1" value="${customer.id}">
-                        <br>
-                        <label>Tên khách hàng</label>
-                        <input type="text" id="name1" placeholder="Nhập tên" required value="${customer.customer}">
-                        <br>
-                        <label>Địa chỉ</label>
-                        <input type="text" id="address1" placeholder="Nhập địa chỉ" required value="${customer.address}">
-                        <br>
-                        <label>CMND</label>
-                        <input type="text" id="idCard1" placeholder="Nhập CCCD" required value="${customer.idCard}">
-                        <br>
-                        <label>SDT</label>
-                        <input type="text" id="phoneNumber1" placeholder="Nhập SDT" required value="${customer.phoneNumber}">
-                        <br>
-                        <label>Ngày sinh</label>
-                        <input type="date" id="birth1" placeholder="Nhập ngày sinh" required value="${customer.dateOfBirth}">
-                        <br>
-                        <label>Img</label>
-                        <input type="text" id="img1" value="${customer.img}">
-                        <br>
-                        <label>Kiểu khách hàng</label>
-                        <div class="customerTypeForm"></div>
+           <form id="customer-form" novalidate>
+  <input type="hidden" id="id1" value="${customer.id}">
+  <div class="form-group">
+    <label for="name1">Tên khách hàng</label>
+    <input type="text" class="form-control" id="name1" placeholder="Nhập tên" required value="${customer.customer}">
+  </div>
+  <div class="form-group">
+    <label for="address1">Địa chỉ</label>
+    <input type="text" class="form-control" id="address1" placeholder="Nhập địa chỉ" required value="${customer.address}">
+  </div>
+  <div class="form-group">
+    <label for="idCard1">CMND</label>
+    <input type="text" class="form-control" id="idCard1" placeholder="Nhập CCCD" required value="${customer.idCard}">
+  </div>
+  <div class="form-group">
+    <label for="phoneNumber1">Số điện thoại</label>
+    <input type="text" class="form-control" id="phoneNumber1" placeholder="Nhập số điện thoại" required value="${customer.phoneNumber}">
+  </div>
+  <div class="form-group">
+    <label for="birth1">Ngày sinh</label>
+    <input type="datetime-local" class="form-control" id="birth1" placeholder="Nhập ngày sinh" required value="${customer.dateOfBirth}">
+  </div>
+
+ <div class="form-group">
+                    <label>Kiểu khách hàng:</label>
+                    <div class="form-control customerTypeForm">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                        <button type="submit" class="btn btn-danger">Save</button>
-                    </div>
+                </div>
+  
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+    <button type="submit" class="btn btn-danger">Lưu</button>
+  </div>
+</form>
+
       `
             $("#edit-form").html(element);
         },
-        error: function(error) {
+        error: function (error) {
             console.log(error);
         }
     })
 }
-function editCustomer(id,name,address,idCard,phoneNumber,birth ,img,customerType) {
-    debugger
+
+function editCustomer(id, name, address, idCard, phoneNumber, birth, img, customerType) {
+
     $.ajax({
         type: "POST",
-        url: `http://localhost:8080/customer/`+ id,
+        url: `http://localhost:8080/customer/` + id,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         data: JSON.stringify(
             {
-                id:id,
-                customer:name,
+                id: id,
+                customer: name,
                 dateOfBirth: birth,
                 address: address,
                 idCard: idCard,
                 phoneNumber: phoneNumber,
                 img: img,
-                customerType: {id:customerType}
+                customerType: {id: customerType}
             }
         ),
         success: () => {
 
             alert("Thay đổi thông tin khách hàng thành công!");
-            $('#modelId').hide();
+            $('#exampleModalEdit').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
             loadCustomers()
@@ -142,8 +151,8 @@ function editCustomer(id,name,address,idCard,phoneNumber,birth ,img,customerType
     })
 }
 
-$('#editCustomerForm').submit(() =>{
-
+$('#editCustomerForm').submit(() => {
+    event.preventDefault()
     let id = $("#id1").val();
     let name = $("#name1").val();
     let address = $("#address1").val();
@@ -152,7 +161,7 @@ $('#editCustomerForm').submit(() =>{
     let birth = $("#birth1").val();
     let img = $("#img1").val();
     let customerType = $("#customerType").val();
-    editCustomer(id,name,address,idCard,phoneNumber,birth,img,customerType);
+    editCustomer(id, name, address, idCard, phoneNumber, birth, img, customerType);
 })
 
 
@@ -195,13 +204,11 @@ function renderCustomers(customers) {
     }
 
 
-
-
     $("#listCustomer").html(element);
 
 }
 
-function getCustomerInfo(id,name) {
+function getCustomerInfo(id, name) {
     document.getElementById("id").value = id;
     document.getElementById("nameCustomer").innerText = "Xóa Customer " + name;
 }
@@ -215,13 +222,14 @@ $("#delete-customer").submit(
     });
 
 function deleteCustomer(id) {
+    let currentPage = getCurrentPage();
     $.ajax({
         type: "DELETE",
-        url: `http://localhost:8080/customer/`+id,
+        url: `http://localhost:8080/customer/` + id,
         success: function (data) {
             console.log("Xóa thành công");
 
-            loadCustomers();
+            loadCustomers(currentPage);
 
             $('#exampleModal').hide();
             $('body').removeClass('modal-open');
@@ -232,9 +240,14 @@ function deleteCustomer(id) {
         },
     });
 }
+function getCurrentPage() {
+let urlParams = new URLSearchParams(window.location.search)
+    return urlParams.get("page") || 1;
+}
 
 
-function createCustomer(name,address,idCard,phoneNumber,birth ,img,customerType) {
+function createCustomer(name, address, idCard, phoneNumber, birth, img, customerType) {
+    let currentPage = getCurrentPage();
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/customer`,
@@ -244,21 +257,21 @@ function createCustomer(name,address,idCard,phoneNumber,birth ,img,customerType)
         },
         data: JSON.stringify(
             {
-                customer:name,
+                customer: name,
                 dateOfBirth: birth,
                 address: address,
                 idCard: idCard,
                 phoneNumber: phoneNumber,
                 img: img,
-                customerType: {id:customerType}
+                customerType: {id: customerType}
             }
         ),
         success: () => {
             alert("Thêm khách hàng thành công!");
-            $('#modelId').hide();
+            $('#exampleModalCreate').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
-            loadCustomers()
+            loadCustomers(currentPage)
 
         },
         error: () => {
@@ -267,7 +280,8 @@ function createCustomer(name,address,idCard,phoneNumber,birth ,img,customerType)
     })
 }
 
-$('#createCustomerForm').submit(() =>{
+$('#createCustomerForm').submit(() => {
+    event.preventDefault();
     let name = $("#name").val();
     let address = $("#address").val();
     let idCard = $("#idCard").val();
@@ -275,7 +289,7 @@ $('#createCustomerForm').submit(() =>{
     let birth = $("#birth").val();
     let img = $("#img").val();
     let customerType = $("#customerType").val();
-    createCustomer(name,address,idCard,phoneNumber,birth,img,customerType);
+    createCustomer(name, address, idCard, phoneNumber, birth, img, customerType);
 })
 
 // list all customer type
@@ -283,7 +297,7 @@ const listAllType = () => {
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/customer/customerType`,
-        header:{
+        header: {
             contentType: 'application/json',
         },
         success: (data) => {
@@ -305,7 +319,6 @@ const allCustomerType = (customerType) => {
 
     $(".customerTypeForm").html(element);
 }
-
 
 
 //  <div class="card col-sm-3" style="width: 18rem;">
