@@ -17,7 +17,7 @@
     <!-- Top menu -->
     <nav class="navbar navbar-expand-lg navbar-inverse navbar-fixed-top px-1 py-0 fixed-top bg-blueGray-200">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/layout/index.html">
             <img src="/layout/assets/img/logo@2x.png" alt="">
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item mx-1" style="width: 90px;">
-                <a class="nav-link active text-center" aria-current="page" href="#">Apple</a>
+                <a class="nav-link active text-center" aria-current="page" href="/layout/index.html">Apple</a>
               </li>
               <li class="nav-item mx-1" style="width: 90px;">
                 <a class="nav-link text-center" href="#">Product</a>
@@ -67,13 +67,40 @@
                       <div class="hideFilter col-2 fs-5 d-flex justify-content-center align-items-center" style="height: 70px;border-top: 1px solid rgb(198, 197, 197);">
                           HIDE FILTERS
                       </div>
-                      <div class="col-6" style="border-top: 1px solid rgb(198, 197, 197);"></div>
-                      <div class="col-2"style="border-top: 1px solid rgb(198, 197, 197);">
+                      <div class="col-6" style="border-top: 1px solid rgb(198, 197, 197);">
+                        <section id="content">
+                          <div class="container mt-0">
+                         
+                         <div class="section-sort clearfix box">
+                            <h4 class="title-sort" style="height: 64px; margin-top: 0; line-height: 64px; margin-right: 10px;">Sort by:</h4>
+                            <ul class="sort-bar clearfix block-sm">
+                               <li class="sort-by-name"><a class="sort-by-container" href="#"><span>name</span></a></li>
+                               <li class="sort-by-price"><a class="sort-by-container" href="#"><span>price</span></a></li>
+                               <li class="sort-by-rating active"><a class="sort-by-container" href="#"><span>duration</span></a></li>
+                            </ul>
+                            <ul class="tiles-swap clearfix block-sm">
+                               <li class="swap-list active">
+                                  <a href="#"><i class="fa fa-list-ul"></i></a>
+                               </li>
+                               <li class="swap-grid">
+                                  <a href="#"><i class="fa fa-th-large"></i></a>
+                               </li>
+                               <li class="swap-block">
+                                  <a href="#"><i class="fa fa-th"></i></a>
+                               </li>
+                            </ul>
+                         </div>
+                         </div>
+                         </section>
+                      </div>
+
+                      <div class="col-2"style="border-top: 1px solid rgb(198, 197, 197); border-left: 1px solid rgb(198, 197, 197);">
                         <div class="d-flex align-items-center justify-content-center" style="height: 100%;" id="paging"></div>
                       </div>
+
                       <div class="col-2 px-0">
                         <!-- Button trigger modal create -->
-                        <button style="width: 100%; height: 100%;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button style="width: 100%; height: 100%; background-color: #f0715f;" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                           Create new product
                         </button>
                       </div>
@@ -230,27 +257,27 @@
         <!-- <form id="createNewProduct"> -->
             <div class="modal-body">
                 <div class="mb-3">
-                    <label for="productName" class="form-label">Product name</label>
+                    <label for="productName" class="form-label">Product name</label><span class="span"> *</span>
                     <input type="text" class="form-control" id="productName" aria-describedby="productName">
                 </div>
                 <div class="mb-3">
-                    <label for="price" class="form-label">Price</label>
+                    <label for="price" class="form-label">Price</label><span class="span"> *</span>
                     <input type="text" class="form-control" id="price" aria-describedby="price">
                 </div>
                 <div class="mb-3">
-                    <label for="img" class="form-label">Img</label>
+                    <label for="img" class="form-label">Img</label><span class="span"> *</span>
                     <input type="text" class="form-control" id="img" aria-describedby="img">
                 </div>
                 <div class="mb-3">
-                    <label for="describe" class="form-label">Describe</label>
+                    <label for="describe" class="form-label">Describe</label><span class="span"> *</span>
                     <input type="text" class="form-control" id="describe" aria-describedby="describe">
                 </div>
                 <div class="mb-3">
-                    <label for="dataSize" class="form-label">Data size</label>
+                    <label for="dataSize" class="form-label">Data size</label><span class="span"> *</span>
                     <input type="text" class="form-control" id="dataSize" aria-describedby="dataSize">
                 </div>
                 <div class="mb-3">
-                    <label for="quantity" class="form-label">Quantity</label>
+                    <label for="quantity" class="form-label">Quantity</label><span class="span"> *</span>
                     <input type="text" class="form-control" id="quantity" aria-describedby="quantity">
                 </div>
                 <div id="madeInCategory"></div>
@@ -267,20 +294,18 @@
     <!-- Modal delete-->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content" id="deleteProductForm">
             <div class="modal-header">
             <h1 class="modal-title fs-5" id="deleteModalLabel">Create product</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="deleteProductForm">
                 <div>
                     Bạn có muốn xóa sản phẩm <span id="deleteProductName"></span> không ?
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" data-bs-dismiss="modal" class="btn btn-primary">Delete</button>
+                <button type="button" data-bs-dismiss="modal" onclick="deleteProductForm()" class="btn btn-primary">Delete</button>
                 </div>
-            </form>
         </div>
         </div>
     </div>
@@ -307,16 +332,6 @@
     </div>
 <script src="/jquery-3.6.4.min.js"></script>
 <script src="product.js"></script>
-
-
-
-
-
-
-
-
-
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>
