@@ -193,10 +193,12 @@ const addNewProduct = (nameProduct,price,img,describeProduct,dataSize,quantity,m
 }
 const deleteProduct = (nameProduct, id) => {
     $("#deleteProductName").html(nameProduct);
-    $("#deleteProductForm").submit(() => {
-        deleteProductButton(id);
-    } 
-    )
+    $('#deleteProductForm').val(id);
+}
+
+const deleteProductForm = () => {
+    let id = $('#deleteProductForm').val();
+    deleteProductButton(id);
 }
 
 const deleteProductButton = (id) => {
@@ -248,23 +250,23 @@ const categoryEdit = (name,img,describe,price,dataSize,quantity) => {
                 </div>
                 <div class="mb-3">
                     <label for="editPrice" class="form-label">Price</label>
-                    <input type="text" class="form-control" id="editPrice" value="${price}" aria-describedby="price"><div id="inputEditPrice"></div>
+                    <input type="text" class="form-control" id="editPrice" value="${price}" aria-describedby="price">
                 </div>
                 <div class="mb-3">
                     <label for="editImg" class="form-label">Img</label>
-                    <input type="text" class="form-control" id="editImg" value="${img}" aria-describedby="img"><div id="inputEditImg"></div>
+                    <input type="text" class="form-control" id="editImg" value="${img}" aria-describedby="img">
                 </div>
                 <div class="mb-3">
                     <label for="editDescribe" class="form-label">Describe</label>
-                    <input type="text" class="form-control" id="editDescribe" value="${describe}" aria-describedby="describe"><div id="inputEditDescribe"></div>
+                    <input type="text" class="form-control" id="editDescribe" value="${describe}" aria-describedby="describe" required>
                 </div>
                 <div class="mb-3">
                     <label for="editDataSize" class="form-label">Data size</label>
-                    <input type="text" class="form-control" id="editDataSize" value="${dataSize}" aria-describedby="dataSize"><div id="inputEditDataSize"></div>
+                    <input type="text" class="form-control" id="editDataSize" value="${dataSize}" aria-describedby="dataSize">
                 </div>
                 <div class="mb-3">
                     <label for="editQuantity" class="form-label">Quantity</label>
-                    <input type="text" class="form-control" id="editQuantity" value="${quantity}" aria-describedby="quantity"><div id="inputEditQuantity"></div>
+                    <input type="text" class="form-control" id="editQuantity" value="${quantity}" aria-describedby="quantity">
                 </div>
     `
     $("#categoryEditInput").html(element);
