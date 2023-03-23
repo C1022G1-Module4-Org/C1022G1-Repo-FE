@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .card {
+            width: 350px;
+        }
+
+        .nav-item:hover {
+            border-radius: 10px;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            height: 65px;
+        }
+
+        .nav-item {
+            display: flex;
+            margin: auto;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar-nav li.nav-item:hover {
+            background-color: #f1f3f5;
+        }
+
+        .navbar-nav li.nav-item a.nav-link {
+            color: #eeeff1;
+        }
+
+        .navbar-nav li.nav-item a.nav-link:hover {
+            color: #007bff;
+        }
+        .inputCustomer {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+
+<body >
+<!-- Top menu -->
+<nav class="navbar navbar-expand-lg navbar-inverse navbar-fixed-top bg-secondary px-1 py-0 fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item mx-1" style="width: 90px;">
+                    <a class="nav-link active text-center" aria-current="page" href="#">Apple</a>
+                </li>
+                <li class="nav-item mx-1" style="width: 90px;">
+                    <a class="nav-link text-center" href="#">Product</a>
+                </li>
+                <li class="nav-item mx-1" style="width: 90px;">
+                    <a class="nav-link text-center" href="#">Employee</a>
+                </li>
+                <li class="nav-item mx-1" style="width: 90px;">
+                    <a class="nav-link text-center" href="#">Customer</a>
+                </li>
+                <li class="nav-item mx-1" style="width: 90px;">
+                    <a class="nav-link text-center" href="#">Store</a>
+                </li>
+                <li class="nav-item mx-1" style="width: 90px;">
+                    <a class="nav-link text-center" href="#">Contact</a>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <div class="nav-item mx-2">
+                    <a class="nav-link text-dark fw-bold" href="#">Sign in</a>
+                </div>
+                <div class="nav-item bg-primary rounded-pill mx-2">
+                    <a class="nav-link text-white" href="#">Sign up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<form class="d-flex mt-5" role="search" onsubmit="loadCustomers(); return false;">
+    <input class="form-control me-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-primary" type="submit">Search</button>
+</form>
+
+<h2 style="text-align: center">Danh sách khách hàng</h2>
+<!--<form action="" role="search" onsubmit="loadBlogs();return false;">-->
+<!--    <input type="text" id="idSearch" name="author" placeholder="Tìm kiếm...">-->
+<!--    <button type="submit" >Tìm kiếm</button>-->
+<!--</form>-->
+<!--<div id="searchProduct"></div>-->
+<div>
+    <button type="button"
+            class="btn btn-primary"
+            data-toggle="modal" data-target="#exampleModalCreate"
+    >
+        Create
+    </button>
+    <table class="table table-striped" >
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>Address</th>
+            <th>ID Card</th>
+            <th>Phone Number</th>
+            <th>customer type</th>
+            <th>birth</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody id="listCustomer"></tbody>
+    </table>
+    <div id="paging" class="text-center"></div>
+</div>
+
+<!--modal Sửa thông tin khách hàng -->
+<div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalTitle2" style="color: red">Sửa thông tin khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="editCustomerForm">
+                <form id="edit-form" class="inputCustomer">
+                    <!--                    <div>-->
+                    <!--                        <input type="hidden" id="id1">-->
+                    <!--                        <br>-->
+                    <!--                        <label>Tên khách hàng</label>-->
+                    <!--                        <input type="text" id="name1" placeholder="Nhập tên" required>-->
+                    <!--                        <br>-->
+                    <!--                        <label>Địa chỉ</label>-->
+                    <!--                        <input type="text" id="address1" placeholder="Nhập địa chỉ" required>-->
+                    <!--                        <br>-->
+                    <!--                        <label>CMND</label>-->
+                    <!--                        <input type="text" id="idCard1" placeholder="Nhập CCCD" required>-->
+                    <!--                        <br>-->
+                    <!--                        <label>SDT</label>-->
+                    <!--                        <input type="text" id="phoneNumber1" placeholder="Nhập SDT" required>-->
+                    <!--                        <br>-->
+                    <!--                        <label>Ngày sinh</label>-->
+                    <!--                        <input type="date" id="birth1" placeholder="Nhập ngày sinh" required>-->
+                    <!--                        <br>-->
+                    <!--                        <label>Img</label>-->
+                    <!--                        <input type="text" id="img1">-->
+                    <!--                        <br>-->
+                    <!--                        <label>Kiểu khách hàng</label>-->
+                    <!--                        <div class="customerTypeForm"></div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="modal-footer">-->
+                    <!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>-->
+                    <!--                        <button type="submit" class="btn btn-danger">Save</button>-->
+                    <!--                    </div>-->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div id="loadMoreContainer" class="d-flex justify-content-center"></div>-->
+<!-- modal thêm mới khách hàng -->
+<div class="modal fade" id="exampleModalCreate" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalTitle" style="color: red">Add Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="createCustomerForm" class="inputCustomer">
+                <div class="form-group">
+                    <label for="name">Customer</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" >
+                    <div class="error-message text-danger" id="customer-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                    <div class="error-message text-danger" id="address-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="idCard">Id Card</label>
+                    <input type="text" class="form-control" id="idCard" name="idCard" placeholder="Id Card" >
+
+                    <div class="error-message text-danger" id="idCard-error"></div>
+
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
+                           placeholder="Phone Number">
+                    <div class="error-message text-danger" id="phoneNumber-error"></div>
+
+                </div>
+                <div class="form-group">
+                    <label for="birth">Birth</label>
+                    <input type="date" class="form-control" id="birth" name="birth" placeholder="Birth"
+                           required>
+
+                    <div class="error-message text-danger" id="birth-error"></div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Customer Type</label>
+                    <div class=" customerTypeForm">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- //modal xóa khách hàng-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: red">Xóa sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" id="delete-customer">
+                <div class="modal-body">
+                    <input hidden type="text" id="id" name="id">
+                    <p id="nameCustomer"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="customer.js"></script>
+</body>
+
+</html>

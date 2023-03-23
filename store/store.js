@@ -12,7 +12,7 @@ function loadStores(page) {
             renderPage(data);
         },
         error: function (error) {
-            console.log(error);
+            alert(error);
         }
     })
 }
@@ -33,7 +33,7 @@ function renderStores(storeList) {
                 <td>${store.storeTypeDTO.type}</td>
                 <td>
                     <button type="button" class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#modalDetail"
-                    // onclick= "getStoreInfo(${store.id})" >Detail</button>
+                    onclick= "detailStore(${store.id})" >Detail</button>
                 </td>
                 <td>
                     <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modalUpdate"
@@ -55,18 +55,18 @@ function movePage(page) {
 function renderPage(storeList) {
     let pageable = "";
     if (
-        storeList.number == storeList.totalPages - 1 &&
+        storeList.number <= storeList.totalPages - 1 &&
         storeList.number > 0
     ) {
         pageable += `
-            <button class="btn btn-secondary" onclick="movePage(${storeList.number - 1})">
+            <button onclick="movePage(${storeList.number - 1})">
             Previous
             </button>
             `;
     }
     for (let i = 1; i <= storeList.totalPages; i++) {
         let page = $(`
-        <button class="btn btn-secondary" onclick="movePage(${i - 1})">
+        <button class="page-item number btn mx-1" onclick="movePage(${i - 1})">
             ${i}
         </button>`);
         if (i === storeList.number + 1) {
@@ -76,9 +76,9 @@ function renderPage(storeList) {
         }
         pageable += page.prop("outerHTML");
     }
-    if (storeList.number == 0 && storeList.number < storeList.totalPages) {
+    if (storeList.number >= 0 && storeList.number < storeList.totalPages - 1) {
         pageable += `
-        <button class="btn btn-secondary" onclick="movePage(${storeList.number + 1})">
+        <button class="page-item number btn mx-1" onclick="movePage(${storeList.number + 1})">
         Next
         </button>
         `;
@@ -104,7 +104,7 @@ function deleteStore(id) {
             loadStores();
         },
         error: function (error) {
-            console.log(error);
+            alert(error);
         }
     })
 }
@@ -119,7 +119,6 @@ $('#deleteStore').submit(
 
 // add 
 $("#addStore").submit(function (event) {
-    debugger
     event.preventDefault();
     let name = $("#name").val();
     let address = $("#address").val();
@@ -132,7 +131,6 @@ $("#addStore").submit(function (event) {
 )
 
 function addStore(name, address, city, email, phone, storeTypeDTO) {
-    debugger
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/store`,
@@ -149,14 +147,26 @@ function addStore(name, address, city, email, phone, storeTypeDTO) {
             storeTypeDTO: { idType: storeTypeDTO },
         }),
         success: function (data) {
-            console.log("success")
+            alert("success")
             window.location.replace("store.html");
         },
         error: function (error) {
-            console.log(error);
+                for(let key of Object.keys(error.responseJSON)){
+                if($(`#${key}-error`)){
+                    $(`#${key}-error`).text(error.responseJSON[key]);
+                }
+            }
+            alert("error");
         },
     })
 }
+ const deleteErrorCreate = () => {
+    $("#name-error").text("");
+    $("#address-error").text("");
+    $("#city-error").text("");
+    $("#email-error").text("");
+    $("#phone-error").text("");
+ }
 function selectOptionStore() {
     debugger
     $.ajax({
@@ -169,7 +179,7 @@ function selectOptionStore() {
             storeOption(data);
         },
         error: function (error) {
-            console.log(error);
+            alert("error");
         }
     })
 }
@@ -187,6 +197,7 @@ function storeOption(storeTypes) {
     `</select>`;
     $("#type").html(elements);
     $("#type-update").html(elements);
+    $("#type-detail").html(elements);
 
 }
 
@@ -197,12 +208,12 @@ $(document).ready(function () {
 // update
 $("#update-performing").submit(function (event) {
     event.preventDefault();
-    let id = $("#id-update").val();
-    let name = $("#name-update").val();
-    let address = $("#address-update").val();
-    let city = $("#city-update").val();
-    let email = $("#email-update").val();
-    let phone = $("#phone-update").val();
+    let id = $("#idUpdate").val();
+    let name = $("#nameUpdate").val();
+    let address = $("#addressUpdate").val();
+    let city = $("#cityUpdate").val();
+    let email = $("#emailUpdate").val();
+    let phone = $("#phoneUpdate").val();
     let storeTypeDTO = $("#selectStore").val();
     updateStore(id, name, address, city, email, phone, storeTypeDTO)
 }
@@ -234,13 +245,17 @@ function updateStore(id, name, address, city, email, phone, storeTypeDTO) {
     
         },
         error: function (error) {
+            for(let key of Object.keys(error.responseJSON)){
+                if($(`#${key}-error`)){
+                    $(`#${key}Update-error`).text(error.responseJSON[key]);
+                }
+            }
             alert("error");
         },
-    })
+    });
 }
 
 function getStoreInfo(id) {
-    debugger
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/store/detail/${id}`,
@@ -251,40 +266,44 @@ function getStoreInfo(id) {
         success: function (data) {
             selectOptionStore();
             let store = data;
-            debugger
             let elements = "";
             elements += `
 
         <div class="form-group">
             <input type="hidden"
-                class="form-control" id="id-update" value="${store.id}">
+                class="form-control" id="idUpdate" value="${store.id}">
         </div>
         <div class="form-group">
                 <label for="name-update">Name</label>
-                <input type="text" class="form-control" id="name-update" value="${store.name}">
+                <input type="text" class="form-control" id="nameUpdate" value="${store.name}" onclick="deleteErrorUpdate()">
+                <div class="errr-message text-danger" id="nameUpdate-error"></div>
         </div>
         <div class="form-group">
-                <label for="address-update">address</label>
-                <input type="text" class="form-control" id="address-update" value="${store.address}">
+                <label for="address-update">Address</label>
+                <input type="text" class="form-control" id="addressUpdate" value="${store.address}" onclick="deleteErrorUpdate()">
+                <div class="errr-message text-danger" id="addressUpdate-error"></div>
         </div>
         <div class="form-group">
-                <label for="city-update">city</label>
-                <input type="text" class="form-control" id="city-update" value="${store.city}">
+                <label for="city-update">City</label>
+                <input type="text" class="form-control" id="cityUpdate" value="${store.city}" onclick="deleteErrorUpdate()">
+                <div class="errr-message text-danger" id="cityUpdate-error"></div>
         </div>
         <div class="form-group">
-                <label for="email-update">email</label>
-                <input type="text" class="form-control" id="email-update" value="${store.email}">
+                <label for="email-update">Email</label>
+                <input type="text" class="form-control" id="emailUpdate" value="${store.email}" onclick="deleteErrorUpdate()">
+                <div class="errr-message text-danger" id="emailUpdate-error"></div>
         </div>
         <div class="form-group">
-                <label for="phone-update">phone</label>
-                <input type="text" class="form-control" id="phone-update" value="${store.phone}">
+                <label for="phone-update">Phone</label>
+                <input type="text" class="form-control" id="phoneUpdate" value="${store.phone}" onclick="deleteErrorUpdate()">
+                <div class="errr-message text-danger" id="phoneUpdate-error"></div>
         </div>
         <div class="form-group">
         <label for="type-update">Type</label>
         <div id="type-update">
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-primary" >Update</button>
         </div>
             `
@@ -295,62 +314,70 @@ function getStoreInfo(id) {
         }
     })
 }
+const deleteErrorUpdate = () => {
+    $("#nameUpdate-error").text("");
+    $("#addressUpdate-error").text("");
+    $("#cityUpdate-error").text("");
+    $("#emailUpdate-error").text("");
+    $("#phoneUpdate-error").text("");
+ }
 
 // detail
-// function detailStore(id) {
-//     debugger
-//     $.ajax({
-//         type: "GET",
-//         url: `http://localhost:8080/store/${id}`,
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         success: function (data) {
-//             debugger
-//             store = data
-//             let elements = "";
-//             elements = `
-//             <div class="form-group">
-//             <input type="text"
-//                 class="form-control" id="id-detail" value="${store.id}">
-//         </div>
-//         <div class="form-group">
-//                 <label for="name-detail">Name</label>
-//                 <input type="text" class="form-control" id="name-detail" value="${store.name}">
-//         </div>
-//         <div class="form-group">
-//                 <label for="address-detail">address</label>
-//                 <input type="text" class="form-control" id="address-detail" value="${store.address}">
-//         </div>
-//         <div class="form-group">
-//                 <label for="city-detail">city</label>
-//                 <input type="text" class="form-control" id="city-detail" value="${store.city}">
-//         </div>
-//         <div class="form-group">
-//                 <label for="email-detail">email</label>
-//                 <input type="text" class="form-control" id="email-detail" value="${store.email}">
-//         </div>
-//         <div class="form-group">
-//                 <label for="phone-detail">phone</label>
-//                 <input type="text" class="form-control" id="phone-detail" value="${store.phone}">
-//         </div>
-//         // <div class="form-group">
-//         // <label for="type-detail">Type</label>
-//         // <input type="text" class="form-control" id="type-detail" value="${store.storeTypeDTO}">
-//         // </div>
-//         <div class="modal-footer">
-//             <button type="submit" class="btn btn-primary" data-dismiss="modal">Close</button>
-//             </div>
-//             `
-//             debugger
-//             $("#detailStore").html(elements)
-//         },
-//         error: function (error) {
-//             console.log("error");
-//         }
-//     })
-// }
-// $(document).ready(function () {
-//     debugger
-//     detailStore();
-// });
+function detailStore(id) {
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/store/details/${id}`,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        success: function (data) {
+            debugger
+            selectOptionStore();
+            store = data
+            let elements = "";
+            elements = `
+            <div class="form-group">
+            <label>ID</label>
+            <p class="form-control">${store.id}</p>
+        </div>
+        <div class="form-group">
+                <label for="name-detail">Name</label>
+                <p class="form-control">${store.name}</p>
+        </div>
+        <div class="form-group">
+                <label for="address-detail">address</label>
+                <p class="form-control">${store.address}</p>
+        </div>
+        <div class="form-group">
+                <label for="city-detail">city</label>
+                <p class="form-control">${store.city}</p>
+        </div>
+        <div class="form-group">
+                <label for="email-detail">email</label>
+                <p class="form-control">${store.email}</p>
+        </div>
+        <div class="form-group">
+                <label for="phone-detail">phone</label>
+                <p class="form-control">${store.phone}</p>
+        </div>
+        <div class="form-group">
+        <label for="type-detail">Type</label>
+        <p class="form-control">${store.storeTypeDTO.type}</p>
+        </div>
+            `
+            debugger
+            $("#detailStore").html(elements)
+        },
+        error: function (error) {
+            console.log("error");
+        }
+    })
+}
+$(document).ready(function () {
+    detailStore();
+});
+
+$('#detailStore').submit(
+    function (event) {
+        event.preventDefault();
+    });
