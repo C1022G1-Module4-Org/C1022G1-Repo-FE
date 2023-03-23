@@ -3,15 +3,37 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="6aa6619e-70d0-46e0-b9a0-280d6541eec5" name="Default Changelist" comment="update customer">
-      <change afterPath="$PROJECT_DIR$/customer/templates/CustomerCss.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_21_03_2023_3_07_CH__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_21_03_2023_3_07_CH__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/templates/customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/customer/templates/customer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/templates/customer.js" beforeDir="false" afterPath="$PROJECT_DIR$/customer/templates/customer.js" afterDir="false" />
-    </list>
+    <list default="true" id="6aa6619e-70d0-46e0-b9a0-280d6541eec5" name="Default Changelist" comment="update customer" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,16 +117,25 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="update customer" />
+    <option name="LAST_COMMIT_MESSAGE" value="update customer" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="121" y="51" key="MergeDialog" timestamp="1679536029456">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="121" y="51" key="MergeDialog/0.0.1280.672@0.0.1280.672" timestamp="1679536029456" />
+    <state x="530" y="205" key="MultipleFileMergeDialog" timestamp="1679536029461">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="530" y="205" key="MultipleFileMergeDialog/0.0.1280.672@0.0.1280.672" timestamp="1679536029461" />
     <state x="93" y="93" width="1095" height="487" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1679459612278">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
     <state x="93" y="93" width="1095" height="487" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.672@0.0.1280.672" timestamp="1679459612278" />
-    <state x="307" y="125" key="git4idea.merge.GitPullDialog" timestamp="1679467358177">
+    <state x="307" y="125" key="git4idea.merge.GitPullDialog" timestamp="1679535937786">
       <screen x="0" y="0" width="1280" height="672" />
     </state>
-    <state x="307" y="125" key="git4idea.merge.GitPullDialog/0.0.1280.672@0.0.1280.672" timestamp="1679467358177" />
+    <state x="307" y="125" key="git4idea.merge.GitPullDialog/0.0.1280.672@0.0.1280.672" timestamp="1679535937786" />
   </component>
 </project>
