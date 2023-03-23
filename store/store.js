@@ -151,7 +151,7 @@ function addStore(name, address, city, email, phone, storeTypeDTO) {
             window.location.replace("store.html");
         },
         error: function (error) {
-            for(let key of Object.keys(error.responseJSON)){
+                for(let key of Object.keys(error.responseJSON)){
                 if($(`#${key}-error`)){
                     $(`#${key}-error`).text(error.responseJSON[key]);
                 }
@@ -160,6 +160,13 @@ function addStore(name, address, city, email, phone, storeTypeDTO) {
         },
     })
 }
+ const deleteErrorCreate = () => {
+    $("#name-error").text("");
+    $("#address-error").text("");
+    $("#city-error").text("");
+    $("#email-error").text("");
+    $("#phone-error").text("");
+ }
 function selectOptionStore() {
     debugger
     $.ajax({
@@ -238,7 +245,6 @@ function updateStore(id, name, address, city, email, phone, storeTypeDTO) {
     
         },
         error: function (error) {
-            debugger
             for(let key of Object.keys(error.responseJSON)){
                 if($(`#${key}-error`)){
                     $(`#${key}Update-error`).text(error.responseJSON[key]);
@@ -269,27 +275,27 @@ function getStoreInfo(id) {
         </div>
         <div class="form-group">
                 <label for="name-update">Name</label>
-                <input required type="text" class="form-control" id="nameUpdate" value="${store.name}">
+                <input type="text" class="form-control" id="nameUpdate" value="${store.name}" onclick="deleteErrorUpdate()">
                 <div class="errr-message text-danger" id="nameUpdate-error"></div>
         </div>
         <div class="form-group">
                 <label for="address-update">Address</label>
-                <input required type="text" class="form-control" id="addressUpdate" value="${store.address}">
+                <input type="text" class="form-control" id="addressUpdate" value="${store.address}" onclick="deleteErrorUpdate()">
                 <div class="errr-message text-danger" id="addressUpdate-error"></div>
         </div>
         <div class="form-group">
                 <label for="city-update">City</label>
-                <input required type="text" class="form-control" id="cityUpdate" value="${store.city}">
+                <input type="text" class="form-control" id="cityUpdate" value="${store.city}" onclick="deleteErrorUpdate()">
                 <div class="errr-message text-danger" id="cityUpdate-error"></div>
         </div>
         <div class="form-group">
                 <label for="email-update">Email</label>
-                <input required type="text" class="form-control" id="emailUpdate" value="${store.email}">
+                <input type="text" class="form-control" id="emailUpdate" value="${store.email}" onclick="deleteErrorUpdate()">
                 <div class="errr-message text-danger" id="emailUpdate-error"></div>
         </div>
         <div class="form-group">
                 <label for="phone-update">Phone</label>
-                <input required type="text" class="form-control" id="phoneUpdate" value="${store.phone}">
+                <input type="text" class="form-control" id="phoneUpdate" value="${store.phone}" onclick="deleteErrorUpdate()">
                 <div class="errr-message text-danger" id="phoneUpdate-error"></div>
         </div>
         <div class="form-group">
@@ -308,6 +314,13 @@ function getStoreInfo(id) {
         }
     })
 }
+const deleteErrorUpdate = () => {
+    $("#nameUpdate-error").text("");
+    $("#addressUpdate-error").text("");
+    $("#cityUpdate-error").text("");
+    $("#emailUpdate-error").text("");
+    $("#phoneUpdate-error").text("");
+ }
 
 // detail
 function detailStore(id) {
