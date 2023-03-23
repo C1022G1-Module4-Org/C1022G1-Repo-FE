@@ -37,8 +37,8 @@ const listEmployee = (data) => {
             <td>
                 <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editModal"
                 onclick="openEditModal(
-                    '${employee.id}','${employee.name}','${employee.idCard}',
-                    '${employee.dateOfBirth}','${employee.phoneNumber}','${employee.address}','${employee.imgUrl}'
+                    '${employee.id}','${employee.name}','${employee.dateOfBirth}',
+                    '${employee.idCard}','${employee.phoneNumber}','${employee.address}','${employee.imgUrl}'
                     )" class="d-flex justify-content-between align-item-center p-price">Edit</button>
             </td>
             <td>
@@ -58,7 +58,6 @@ function movePage(nextPage) {
 }
 
 function renderPage(employee) {
-  debugger  
     let page = "";
     if (employee.number == employee.totalPages - 1 && employee.number > 0) {
         page += `
@@ -120,7 +119,9 @@ const showListPosition = (listPositionCategory) => {
   $("#editListPosition").html(element);
 };
 
-const addNew = () => {
+
+// =======Create=======
+function addNew(){
   let nameEmployee = $("#employeeName").val();
   let idCard = $("#idCard").val();
   let dateofbirth = $("#dateofbirth").val();
@@ -156,8 +157,8 @@ const addNewEmployee = (
     },
     data: JSON.stringify({
       name: nameEmployee,
-      dateOfBirth: dateofbirth,
       idCard: idCard,
+      dateOfBirth: dateofbirth,
       phoneNumber: phoneNumber,
       address: address,
       imgUrl: img,
@@ -169,37 +170,48 @@ const addNewEmployee = (
       $('.modal-backdrop').remove();
       loadEmployee();
     },
-    error: (error) => {
-      console.log(error);
-    },
-  });
-};
+    // error: (xhr,status,error) => {
+
+    //         if (xhr.status == 400) {
+    //         var errors = JSON.parse(xhr.responseText);
+    //         var errorMessage = errors.join("\n");
+    //         alert(errorMessage);
+
+            error: (error) => {
+              for (let key of Object.keys(error.responseJSON)) {
+                  if ($(`#${key}-error`)) {
+                      $(`#${key}-error`).text(error.responseJSON[key]);
+                  }
+              }
+          }
+        })
+      }
 
 //==========Edit===========
 
-const openEditModal = (
-  id,
-  name,
-  dateOfBirth,
-  idCard,
-  phoneNumber,
-  address,
-  imgUrl
-) => {
-  actionEdit(name, dateOfBirth, idCard, phoneNumber, address, imgUrl);
-  $("#indexFind").val(id);
-};
+  const openEditModal = (id,
+    name,
+    dateOfBirth,
+    idCard,
+    phoneNumber,
+    address,
+    imgUrl) =>{
+    actionEdit(name, dateOfBirth, idCard, phoneNumber, address, imgUrl);
+    $("#indexFind").val(id); 
+  }
+
+
 
 const openEdit = () => {
   let id = $("#indexFind").val();
   let name = $("#employeeNameEdit").val();
-  let dateOfBirth = $("#dateofbirthEdit").val();
+  let dateOfBirth= $("#dateofbirthEdit").val();
   let idCard = $("#idCardEdit").val();
   let phoneNumber = $("#phoneEdit").val();
   let address = $("#addressEdit").val();
   let imgUrl = $("#imgEdit").val();
   let position = $("#listPositionValue").val();
-  addUpdateEmployee(
+  updateEmployee(
     id,
     name,
     dateOfBirth,
@@ -223,32 +235,39 @@ const actionEdit = (
                 <div class="mb-3">
                     <label for="employeeNameEdit" class="form-label">Employee name</label>
                     <input type="text" class="form-control" id="employeeNameEdit" value="${name}" aria-describedby="employeeNameEdit">
+                    <span class="text-danger" id="name-error"></span>
                 </div>      
                 <div class="mb-3">
                     <label for="dateofbirthEdit" class="form-label">Date of Birth</label>
                     <input type="text" class="form-control" id="dateofbirthEdit" value="${dateOfBirth}" aria-describedby="dateofbirthEdit">
-                </div>
+                    <span class="text-danger" id="dateOfBirth-error"></span>
+                </div>    
                 <div class="mb-3">
                     <label for="idCardEdit" class="form-label">ID Card</label>
                     <input type="text" class="form-control" id="idCardEdit" value="${idCard}" aria-describedby="idCardEdit">
-                </div>
+                    <span class="text-danger" id="idCard-error"></span>
+                </div>  
+           
                 <div class="mb-3">
                     <label for="phoneEdit" class="form-label">Phone Number</label>
                     <input type="text" class="form-control" id="phoneEdit" value="${phoneNumber}" aria-describedby="phoneEdit">
+                    <span class="text-danger" id="phoneNumber-error"></span>
                 </div>
                 <div class="mb-3">
                     <label for="addressEdit" class="form-label">Address :</label>
                     <input type="text" class="form-control" id="addressEdit" value="${address}" aria-describedby="addressEdit">
+                    <span class="text-danger" id="address-error"></span>
                 </div>
                 <div class="mb-3">
                     <label for="imgEdit" class="form-label">Img</label>
                     <input type="text" class="form-control" id="imgEdit" value="${imgUrl}" aria-describedby="imgEdit">
+                    <span class="text-danger" id="imgUrl-error"></span>
                 </div>
                 `;
   $("#menuEdit").html(element);
-};
+}
 
-const addUpdateEmployee = (
+const updateEmployee = (
   id,
   nameEmployee,
   dateOfBirth,
@@ -257,10 +276,14 @@ const addUpdateEmployee = (
   address,
   imgUrl,
   position
-) => {
+) => { 
   $.ajax({
     type: "PUT",
     url: `http://localhost:8080/apple/employee/${id}`,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+  },
     data: JSON.stringify({
       name: nameEmployee,
       dateOfBirth: dateOfBirth,
@@ -271,24 +294,83 @@ const addUpdateEmployee = (
       position: {id: position},
     }),
     success: (data) => {
-      alert("Update success");
-      $("#editModal").modal("hide");
-      $('body').removeClass('modal-open');
-      $('.modal-backdrop').remove();
-      loadEmployee();
+      $('#editModal').on('submit', function(e) {
+        e.preventDefault();
+        loadEmployee();
+        e.stopPropagation();
+            loadEmployee();
+       // Now nothing will happen
+    });
     },
     error: (error) => {
-      console.log(error);
+   
+      let element = `
+      <div class="mb-3">
+          <label for="employeeNameEdit" class="form-label">Employee name</label>
+          <input type="text" class="form-control" id="employeeNameEdit" value="${name}" aria-describedby="employeeNameEdit">
+          <span class="text-danger" id="name-error">`+ error.responseJSON.name +`</span>
+      </div>      
+      <div class="mb-3">
+          <label for="dateofbirthEdit" class="form-label">Date of Birth</label>
+          <input type="text" class="form-control" id="dateofbirthEdit" value="${dateOfBirth}" aria-describedby="dateofbirthEdit">
+          <span class="text-danger" id="dateOfBirth-error">`+ error.responseJSON.dateOfBirth +`</span>
+      </div>    
+      <div class="mb-3">
+          <label for="idCardEdit" class="form-label">ID Card</label>
+          <input type="text" class="form-control" id="idCardEdit" value="${idCard}" aria-describedby="idCardEdit">
+          <span class="text-danger" id="idCard-error">`+ error.responseJSON.idCard +`</span>
+      </div>  
+ 
+      <div class="mb-3">
+          <label for="phoneEdit" class="form-label">Phone Number</label>
+          <input type="text" class="form-control" id="phoneEdit" value="${phoneNumber}" aria-describedby="phoneEdit">
+          <span class="text-danger" id="phoneNumber-error">`+ error.responseJSON.phoneNumber +`</span>
+      </div>
+      <div class="mb-3">
+          <label for="addressEdit" class="form-label">Address :</label>
+          <input type="text" class="form-control" id="addressEdit" value="${address}" aria-describedby="addressEdit">
+          <span class="text-danger" id="address-error">`+ error.responseJSON.address +`</span>
+      </div>
+      <div class="mb-3">
+          <label for="imgEdit" class="form-label">Img</label>
+          <input type="text" class="form-control" id="imgEdit" value="${imgUrl}" aria-describedby="imgEdit">
+          <span class="text-danger" id="imgUrl-error">`+ error.responseJSON.imgUrl +`</span>
+      </div>
+      `;
+$("#menuEdit").html(element);
+
+      $( '#name-error' ).html(  error.responseJSON.name);
+      // b.innerHTML = error.responseJSON.name;
+      // $(`#name-error`).text("hello");
+      // console.log(#${Object.keys(error.responseJSON)[0]}-error);
+
+      ;
+
+
+      error: (error) => {
+        debugger
+        for (let key of Object.keys(error.responseJSON)) {
+
+            if ($(`#${key}`)) {
+              console.log(123);
+
+                $(`#${key}-error`).text(error.responseJSON[key]);
+            }      console.log(123);
+
+        }
+    }
     },
   });
 };
 
 const deleteEmployee = (nameEmployee, id) => {
   $("#deleteEmployeeName").html(nameEmployee);
-  $("#deleteEmployeeForm").click(() => {
+  $("#deleteEmployeeForm").on('submit', function(e) {
+    e.preventDefault();
     deleteEmployeeButton(id);
-  });
-};
+    e.stopPropagation();
+    loadEmployee();
+})};
 
 const deleteEmployeeButton = (id) => {
   $.ajax({
