@@ -33,16 +33,26 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12adec5d-2f99-441d-89ff-0a0e0d140612" name="Changes" comment="update" />
+    <list default="true" id="6aa6619e-70d0-46e0-b9a0-280d6541eec5" name="Default Changelist" comment="update customer">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer/templates/customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/customer/templates/customer.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/product" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -55,19 +65,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
   <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="12adec5d-2f99-441d-89ff-0a0e0d140612" name="Changes" comment="" />
+      <changelist id="6aa6619e-70d0-46e0-b9a0-280d6541eec5" name="Default Changelist" comment="update customer" />
       <created>1679382113876</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1679382113876</updated>
       <workItem from="1679382117725" duration="60000" />
-      <workItem from="1679386437421" duration="142000" />
+      <workItem from="1679389462983" duration="569000" />
+      <workItem from="1679390232835" duration="1645000" />
+      <workItem from="1679448173421" duration="12539000" />
+      <workItem from="1679466932643" duration="2775000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1679383299971</created>
@@ -76,24 +100,52 @@
       <option name="project" value="LOCAL" />
       <updated>1679383299971</updated>
     </task>
-    <task id="LOCAL-00002" summary="update">
-      <created>1679386445770</created>
+    <task id="LOCAL-00002" summary="update customer">
+      <created>1679536087826</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1679386445770</updated>
+      <updated>1679536087826</updated>
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="update customer" />
+    <option name="LAST_COMMIT_MESSAGE" value="update customer" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="121" y="51" key="MergeDialog" timestamp="1679536029456">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="121" y="51" key="MergeDialog/0.0.1280.672@0.0.1280.672" timestamp="1679536029456" />
+    <state x="530" y="205" key="MultipleFileMergeDialog" timestamp="1679536029461">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="530" y="205" key="MultipleFileMergeDialog/0.0.1280.672@0.0.1280.672" timestamp="1679536029461" />
+    <state x="93" y="93" width="1095" height="487" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1679459612278">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="93" y="93" width="1095" height="487" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.672@0.0.1280.672" timestamp="1679459612278" />
+    <state x="307" y="125" key="git4idea.merge.GitPullDialog" timestamp="1679535937786">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="307" y="125" key="git4idea.merge.GitPullDialog/0.0.1280.672@0.0.1280.672" timestamp="1679535937786" />
   </component>
 </project>

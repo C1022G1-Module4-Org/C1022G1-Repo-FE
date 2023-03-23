@@ -76,31 +76,22 @@ function getCustomerInfoUpdate(id) {
   <div class="form-group">
     <label for="name1">Tên khách hàng</label>
     <input type="text" class="form-control" id="name1" placeholder="Nhập tên" required value="${customer.customer}">
-          <div class="error-message text-danger" id="customer-error"></div>
-                        
   </div>
   <div class="form-group">
     <label for="address1">Địa chỉ</label>
     <input type="text" class="form-control" id="address1" placeholder="Nhập địa chỉ" required value="${customer.address}">
-    <div class="error-message text-danger" id="address-error"></div>
-                    
   </div>
   <div class="form-group">
     <label for="idCard1">CMND</label>
     <input type="text" class="form-control" id="idCard1" placeholder="Nhập CCCD" required value="${customer.idCard}">
-       <div class="error-message text-danger" id="idCard-error"></div>
-                       
   </div>
   <div class="form-group">
     <label for="phoneNumber1">Số điện thoại</label>
     <input type="text" class="form-control" id="phoneNumber1" placeholder="Nhập số điện thoại" required value="${customer.phoneNumber}">
-    <div class="error-message text-danger" id="phoneNumber-error"></div>
-                       
   </div>
   <div class="form-group">
     <label for="birth1">Ngày sinh</label>
-    <input type="date" class="form-control" id="birth1" placeholder="Nhập ngày sinh" required value="${customer.dateOfBirth}">
-     <div class="error-message text-danger" id="birth-error"></div>
+    <input type="datetime-local" class="form-control" id="birth1" placeholder="Nhập ngày sinh" required value="${customer.dateOfBirth}">
   </div>
 
  <div class="form-group">
@@ -221,6 +212,8 @@ function renderCustomers(customers) {
     }
 
 
+
+
     $("#listCustomer").html(element);
 
 }
@@ -257,15 +250,17 @@ function deleteCustomer(id) {
         },
     });
 }
+function getCurrentPage() {
+let urlParams = new URLSearchParams(window.location.search)
+    return urlParams.get("page") || 1;
+}
 
 function getCurrentPage() {
     let urlParams = new URLSearchParams(window.location.search)
     return urlParams.get("page") || 1;
 }
 
-
-function createCustomer(name, address, idCard, phoneNumber, birth, customerType) {
-    debugger
+function createCustomer(name, address, idCard, phoneNumber, birth, img, customerType) {
     let currentPage = getCurrentPage();
     $.ajax({
         type: "POST",
@@ -281,6 +276,7 @@ function createCustomer(name, address, idCard, phoneNumber, birth, customerType)
                 address: address,
                 idCard: idCard,
                 phoneNumber: phoneNumber,
+                img: img,
                 customerType: {id: customerType}
             }
         ),
@@ -311,8 +307,9 @@ $('#createCustomerForm').submit(() => {
     let idCard = $("#idCard").val();
     let phoneNumber = $("#phoneNumber").val();
     let birth = $("#birth").val();
+    let img = $("#img").val();
     let customerType = $("#customerType").val();
-    createCustomer(name, address, idCard, phoneNumber, birth, customerType);
+    createCustomer(name, address, idCard, phoneNumber, birth, img, customerType);
 })
 
 // list all customer type
