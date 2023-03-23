@@ -100,7 +100,7 @@
 
                       <div class="col-2 px-0">
                         <!-- Button trigger modal create -->
-                        <button style="width: 100%; height: 100%; background-color: #f0715f;" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button onclick="deleteError()" style="width: 100%; height: 100%; background-color: #f0715f;" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
                           Create new product
                         </button>
                       </div>
@@ -258,33 +258,38 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="productName" class="form-label">Product name</label><span class="span"> *</span>
-                    <input type="text" class="form-control" id="productName" aria-describedby="productName">
+                    <input type="text" class="form-control" id="productName" aria-describedby="productName"  onclick="deleteError()">
+                    <div class="error-message text-danger" id="name-error"></div>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price</label><span class="span"> *</span>
-                    <input type="text" class="form-control" id="price" aria-describedby="price">
+                    <input type="text" class="form-control" id="price" aria-describedby="price" onclick="deleteError()">
+                    <div class="error-message text-danger" id="price-error"></div>
                 </div>
                 <div class="mb-3">
                     <label for="img" class="form-label">Img</label><span class="span"> *</span>
-                    <input type="text" class="form-control" id="img" aria-describedby="img">
+                    <input type="text" class="form-control" id="img" aria-describedby="img" onclick="deleteError()">
+                    <div class="error-message text-danger" id="img-error"></div>
                 </div>
                 <div class="mb-3">
                     <label for="describe" class="form-label">Describe</label><span class="span"> *</span>
-                    <input type="text" class="form-control" id="describe" aria-describedby="describe">
+                    <input type="text" class="form-control" id="describe" aria-describedby="describe" onclick="deleteError()">
+                    <div class="error-message text-danger" id="describeProduct-error"></div>
                 </div>
                 <div class="mb-3">
                     <label for="dataSize" class="form-label">Data size</label><span class="span"> *</span>
-                    <input type="text" class="form-control" id="dataSize" aria-describedby="dataSize">
+                    <input type="text" class="form-control" id="dataSize" aria-describedby="dataSize" onclick="deleteError()">
                 </div>
                 <div class="mb-3">
                     <label for="quantity" class="form-label">Quantity</label><span class="span"> *</span>
-                    <input type="text" class="form-control" id="quantity" aria-describedby="quantity">
+                    <input type="text" class="form-control" id="quantity" aria-describedby="quantity" onclick="deleteError()">
+                    <div class="error-message text-danger" id="quantity-error"></div>
                 </div>
                 <div id="madeInCategory"></div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" data-bs-dismiss="modal" class="btn btn-primary" onclick="create()">Save changes</button>
+            <button type="button" class="btn btn-primary" onclick="create()">Save changes</button>
             </div>
         <!-- </form> -->
         </div>

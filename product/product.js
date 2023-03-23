@@ -93,7 +93,7 @@ function renderPage(products) {
         page += `
     <button class="page-item btn" 
     onclick="movePage(${products.number - 1})">
-    <i style="color: black" class="bi bi-caret-right-fill"></i>
+    <div>Before</div>
     </button>
     `
     }
@@ -114,7 +114,7 @@ function renderPage(products) {
         page += `
     <button class="page-item btn" 
     onclick="movePage(${products.number + 1})">
-    <i class="ti-angle-right"></i>
+    <div>Next</div>
     </button>
     `
     }
@@ -185,12 +185,27 @@ const addNewProduct = (nameProduct,price,img,describeProduct,dataSize,quantity,m
             document.getElementById("dataSize").value = "";
             document.getElementById("quantity").value = "";
             loadProducts();
+            $("#exampleModal").modal('hide');
         },
         error : (error) => {
-            console.log(error);
+            for (let key of Object.keys(error.responseJSON)) {
+                if ($(`#${key}-error`)) {
+                  $(`#${key}-error`).text(error.responseJSON[key]);;
+                }
+              }
+              alert("Loi khi them !!!")
         }
     })
 }
+
+const deleteError = () => {
+    $("#name-error").text("");
+    $("#price-error").text("");
+    $("#img-error").text("");
+    $("#describeProduct-error").text("");
+    $("#quantity-error").text("");
+}
+
 const deleteProduct = (nameProduct, id) => {
     $("#deleteProductName").html(nameProduct);
     $('#deleteProductForm').val(id);
