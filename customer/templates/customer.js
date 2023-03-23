@@ -74,37 +74,37 @@ function getCustomerInfoUpdate(id) {
            <form id="customer-form" novalidate>
   <input type="hidden" id="id1" value="${customer.id}">
   <div class="form-group">
-    <label for="name1">Tên khách hàng</label>
+    <label for="name1">Name Customer</label>
     <input type="text" class="form-control" id="name1" placeholder="Nhập tên" required value="${customer.customer}">
           <div class="error-message text-danger" id="customer-error"></div>
                         
   </div>
   <div class="form-group">
-    <label for="address1">Địa chỉ</label>
-    <input type="text" class="form-control" id="address1" placeholder="Nhập địa chỉ" required value="${customer.address}">
+    <label for="address1">Address</label>
+    <input type="text" class="form-control" id="address1" placeholder="Address" required value="${customer.address}">
     <div class="error-message text-danger" id="address-error"></div>
                     
   </div>
   <div class="form-group">
-    <label for="idCard1">CMND</label>
-    <input type="text" class="form-control" id="idCard1" placeholder="Nhập CCCD" required value="${customer.idCard}">
+    <label for="idCard1">Id Card</label>
+    <input type="text" class="form-control" id="idCard1" placeholder="Enter Id Card" required value="${customer.idCard}">
        <div class="error-message text-danger" id="idCard-error"></div>
                        
   </div>
   <div class="form-group">
-    <label for="phoneNumber1">Số điện thoại</label>
-    <input type="text" class="form-control" id="phoneNumber1" placeholder="Nhập số điện thoại" required value="${customer.phoneNumber}">
+    <label for="phoneNumber1">Phone Number</label>
+    <input type="text" class="form-control" id="phoneNumber1" placeholder="Enter Phone Number" required value="${customer.phoneNumber}">
     <div class="error-message text-danger" id="phoneNumber-error"></div>
                        
   </div>
   <div class="form-group">
-    <label for="birth1">Ngày sinh</label>
-    <input type="date" class="form-control" id="birth1" placeholder="Nhập ngày sinh" required value="${customer.dateOfBirth}">
+    <label for="birth1">Birth</label>
+    <input type="date" class="form-control" id="birth1" placeholder="Enter Birth Day" required value="${customer.dateOfBirth}">
      <div class="error-message text-danger" id="birth-error"></div>
   </div>
 
  <div class="form-group">
-                    <label>Kiểu khách hàng:</label>
+                    <label>Customer Type</label>
                     <div class="form-control customerTypeForm">
                     </div>
                 </div>
