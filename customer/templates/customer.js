@@ -44,7 +44,7 @@ function renderPage(customers) {
         page += pageItem.prop('outerHTML');
     }
 
-    if (customers.number == 0 && customers.number < customers.totalPages) {
+    if (customers.number >= 1 && customers.number < customers.totalPages-1) {
         page += `
     <button class="page-item btn btn-primary btn-sm" 
     onclick="movePage(${customers.number + 1})">
@@ -76,22 +76,31 @@ function getCustomerInfoUpdate(id) {
   <div class="form-group">
     <label for="name1">Tên khách hàng</label>
     <input type="text" class="form-control" id="name1" placeholder="Nhập tên" required value="${customer.customer}">
+          <div class="error-message text-danger" id="customer-error"></div>
+                        
   </div>
   <div class="form-group">
     <label for="address1">Địa chỉ</label>
     <input type="text" class="form-control" id="address1" placeholder="Nhập địa chỉ" required value="${customer.address}">
+    <div class="error-message text-danger" id="address-error"></div>
+                    
   </div>
   <div class="form-group">
     <label for="idCard1">CMND</label>
     <input type="text" class="form-control" id="idCard1" placeholder="Nhập CCCD" required value="${customer.idCard}">
+       <div class="error-message text-danger" id="idCard-error"></div>
+                       
   </div>
   <div class="form-group">
     <label for="phoneNumber1">Số điện thoại</label>
     <input type="text" class="form-control" id="phoneNumber1" placeholder="Nhập số điện thoại" required value="${customer.phoneNumber}">
+    <div class="error-message text-danger" id="phoneNumber-error"></div>
+                       
   </div>
   <div class="form-group">
     <label for="birth1">Ngày sinh</label>
-    <input type="datetime-local" class="form-control" id="birth1" placeholder="Nhập ngày sinh" required value="${customer.dateOfBirth}">
+    <input type="date" class="form-control" id="birth1" placeholder="Nhập ngày sinh" required value="${customer.dateOfBirth}">
+     <div class="error-message text-danger" id="birth-error"></div>
   </div>
 
  <div class="form-group">
@@ -108,9 +117,17 @@ function getCustomerInfoUpdate(id) {
 
       `
             $("#edit-form").html(element);
+            setTimeout(function () {
+                $("#customerType").val(customer.customerType.id)
+            }, 10)
+
         },
         error: function (error) {
-            console.log(error);
+            for (let key of Object.keys(error.responseJSON)) {
+                if ($(`#${key}-error`)) {
+                    $(`#${key}-error`).text(error.responseJSON[key]);
+                }
+            }
         }
     })
 }
@@ -240,13 +257,15 @@ function deleteCustomer(id) {
         },
     });
 }
+
 function getCurrentPage() {
-let urlParams = new URLSearchParams(window.location.search)
+    let urlParams = new URLSearchParams(window.location.search)
     return urlParams.get("page") || 1;
 }
 
 
-function createCustomer(name, address, idCard, phoneNumber, birth, img, customerType) {
+function createCustomer(name, address, idCard, phoneNumber, birth, customerType) {
+    debugger
     let currentPage = getCurrentPage();
     $.ajax({
         type: "POST",
@@ -262,7 +281,6 @@ function createCustomer(name, address, idCard, phoneNumber, birth, img, customer
                 address: address,
                 idCard: idCard,
                 phoneNumber: phoneNumber,
-                img: img,
                 customerType: {id: customerType}
             }
         ),
@@ -274,9 +292,15 @@ function createCustomer(name, address, idCard, phoneNumber, birth, img, customer
             loadCustomers(currentPage)
 
         },
-        error: () => {
-            alert("lỗi không thêm được");
+        error: function (error) {
+            for (let key of Object.keys(error.responseJSON)) {
+                if ($(`#${key}-error`)) {
+                    $(`#${key}-error`).text(error.responseJSON[key]);
+                }
+            }
         }
+        ,
+
     })
 }
 
@@ -287,9 +311,8 @@ $('#createCustomerForm').submit(() => {
     let idCard = $("#idCard").val();
     let phoneNumber = $("#phoneNumber").val();
     let birth = $("#birth").val();
-    let img = $("#img").val();
     let customerType = $("#customerType").val();
-    createCustomer(name, address, idCard, phoneNumber, birth, img, customerType);
+    createCustomer(name, address, idCard, phoneNumber, birth, customerType);
 })
 
 // list all customer type
