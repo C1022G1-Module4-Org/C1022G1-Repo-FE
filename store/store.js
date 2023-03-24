@@ -87,7 +87,7 @@ function renderPage(storeList) {
 }
 // delete
 function getStoreIdAndName(id, name) {
-    
+
     document.getElementById("deleteId").value = id;
     document.getElementById("deleteName").innerText = "Do you wanna delete " + name + "?";
 }
@@ -147,26 +147,26 @@ function addStore(name, address, city, email, phone, storeTypeDTO) {
             storeTypeDTO: { idType: storeTypeDTO },
         }),
         success: function (data) {
-            alert("success")
+            alert("Success")
             window.location.replace("store.html");
         },
         error: function (error) {
-                for(let key of Object.keys(error.responseJSON)){
-                if($(`#${key}-error`)){
+            for (let key of Object.keys(error.responseJSON)) {
+                if ($(`#${key}-error`)) {
                     $(`#${key}-error`).text(error.responseJSON[key]);
                 }
             }
-            alert("error");
+            alert("Error");
         },
     })
 }
- const deleteErrorCreate = () => {
+const deleteErrorCreate = () => {
     $("#name-error").text("");
     $("#address-error").text("");
     $("#city-error").text("");
     $("#email-error").text("");
     $("#phone-error").text("");
- }
+}
 function selectOptionStore() {
     debugger
     $.ajax({
@@ -179,7 +179,7 @@ function selectOptionStore() {
             storeOption(data);
         },
         error: function (error) {
-            alert("error");
+            alert("Error");
         }
     })
 }
@@ -242,15 +242,15 @@ function updateStore(id, name, address, city, email, phone, storeTypeDTO) {
             $("body").removeClass("modal-open");
             $('.modal-backdrop').remove();
             loadStores();
-    
+
         },
         error: function (error) {
-            for(let key of Object.keys(error.responseJSON)){
-                if($(`#${key}-error`)){
+            for (let key of Object.keys(error.responseJSON)) {
+                if ($(`#${key}-error`)) {
                     $(`#${key}Update-error`).text(error.responseJSON[key]);
                 }
             }
-            alert("error");
+            alert("Error");
         },
     });
 }
@@ -309,8 +309,8 @@ function getStoreInfo(id) {
             `
             $("#update-performing").html(elements);
         },
-        error: function (error) {   
-            alert("error");
+        error: function (error) {
+            alert("Error");
         }
     })
 }
@@ -320,7 +320,7 @@ const deleteErrorUpdate = () => {
     $("#cityUpdate-error").text("");
     $("#emailUpdate-error").text("");
     $("#phoneUpdate-error").text("");
- }
+}
 
 // detail
 function detailStore(id) {
@@ -345,19 +345,19 @@ function detailStore(id) {
                 <p class="form-control">${store.name}</p>
         </div>
         <div class="form-group">
-                <label for="address-detail">address</label>
+                <label for="address-detail">Address</label>
                 <p class="form-control">${store.address}</p>
         </div>
         <div class="form-group">
-                <label for="city-detail">city</label>
+                <label for="city-detail">City</label>
                 <p class="form-control">${store.city}</p>
         </div>
         <div class="form-group">
-                <label for="email-detail">email</label>
+                <label for="email-detail">Email</label>
                 <p class="form-control">${store.email}</p>
         </div>
         <div class="form-group">
-                <label for="phone-detail">phone</label>
+                <label for="phone-detail">Phone</label>
                 <p class="form-control">${store.phone}</p>
         </div>
         <div class="form-group">

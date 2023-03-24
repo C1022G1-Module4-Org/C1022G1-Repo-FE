@@ -93,7 +93,7 @@ function renderPage(products) {
         page += `
     <button class="page-item btn" 
     onclick="movePage(${products.number - 1})">
-    <div>Before</div>
+    <div>Previous</div>
     </button>
     `
     }
@@ -251,10 +251,6 @@ const editProductxxx = () => {
     let madeInProduct = $('#madeInValue').val();
     editProductButton(id,nameProduct,imgProduct,priceProduct,describeProduct,dataSizeProduct,quantityProduct,madeInProduct);
 }
-
-
-
-
 
 
 const categoryEdit = (name,img,describe,price,dataSize,quantity) => {
